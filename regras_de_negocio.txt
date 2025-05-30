@@ -1,0 +1,9 @@
+
+1. Perspectiva do Usuário Visitante (Público Externo)
+
+- O site deve permitir acesso via navegador web em qualquer dispositivo, com responsividade.
+- Deve exibir uma seção de "Recomendações de Leitura" com curadoria de artigos, livros e policy briefs, organizados por tema.
+- Deve conter uma área de "Integrantes" com perfis profissionais dos membros (foto, formação, áreas de expertise, links para Lattes/LinkedIn).
+- Deve oferecer uma seção de "Publicações" para destacar pesquisas, policy briefs e materiais técnicos (com downloads organizados).
+- Deve incluir um formulário de inscrição para a Newsletter mensal (com confirmação por e-mail).
+- Deve disponibilizar uma página de "Certificados" para membros (acesso restrito) baixarem documentos.
