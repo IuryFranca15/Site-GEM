@@ -1,0 +1,100 @@
+.container {
+  width: 100%;
+  background-color: #014460;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2;
+    padding-bottom: 0.5rem;
+}
+
+.divider {
+  width: 10rem;
+  height: 2px;
+  background-color: #40b2ab;
+  margin: 0.5rem auto 0 auto;
+}
+
+.navButton {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: white;
+}
+
+.navLeft {
+  left: -1rem;
+}
+
+.navRight {
+  right: -1rem;
+}
+
+@media (max-width: 768px) {
+  .navLeft,
+  .navRight {
+    display: none;
+  }
+
+  .divider {
+    width: 6rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
+
+/* Ajustar seta no tablet */
+@media (max-width: 1023px) {
+  .navButton {
+    display: block; /* Mostrar setas */
+    top: auto;
+    bottom: -3.5rem;
+    transform: none;
+  }
+
+  .navLeft {
+    left: 20%;
+  }
+
+  .navRight {
+    right: 20%;
+  }
+}
