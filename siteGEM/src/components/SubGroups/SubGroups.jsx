@@ -1,7 +1,6 @@
 // import React, { useEffect, useState } from 'react';
-import Styles from './SubGrupos.module.css'
+import Styles from './SubGroups.module.css'
 import { IoArrowForwardSharp } from "react-icons/io5";
-
 import pesca from '../../assets/image/pesca.jpg'
 import pescaIcone from '../../assets/image/pesca-icone.png'
 
@@ -88,9 +87,7 @@ const SubGrupos = () => {
           <h2 className={Styles.title}>Conheça os nossos subgrupos</h2>
           <div className={Styles.divider}></div>
         </div>
-
         <div className={Styles.grids}>
-
           {subgrupos.map((grupo) => {
             return (
               <div className={Styles.grid} key={grupo.id}>
@@ -108,14 +105,10 @@ const SubGrupos = () => {
 
                 </div>
               </div>
-
             )
           })}
-
-
         </div>
       </div>
-
     </div >
   )
 }
