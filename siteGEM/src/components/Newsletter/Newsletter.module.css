@@ -1,0 +1,119 @@
+.container{
+  padding: 80px 16px 80px 16px;
+  display: flex;
+  justify-content: center;
+
+  background-image: url('../../assets/image/Bg-fundo-do-mar.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat ;
+
+  background-color: rgba(1, 68, 96, 0.6); /* 0.0 (transparente) a 1.0 (opaco) */
+  background-blend-mode: multiply; /* ou overlay, darken, etc. */
+}
+
+.content {
+  max-width: 900px ;
+  padding: 80px 100px 80px 100px;
+  background-color:#014460 ;
+  border-radius: 10px;
+}
+
+.title{
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  padding-bottom: 20px;
+}
+
+.text{
+  font-size: 1rem;
+  color: #fff;
+
+  text-align: center;
+}
+
+.contact{
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  padding-top: 1.25rem;
+}
+
+.input{
+  flex: 1;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+  background-color: #03394d;
+
+  outline: none;
+}
+
+.button {
+  padding: 10px 20px;
+  color: white;
+  background: linear-gradient(90deg, #014460, #017c8a);
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-position 0.3s ease;
+  background-size: 200% 100%;
+  background-position: left;
+  align-self: center;
+}
+
+.button:hover {
+  background-position: right;
+}
+
+/* .button {
+  padding: 10px 20px;
+  background-color: #f5f5ef;
+  color: #014460;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+} */
+
+
+@media  (max-width: 640px) {
+  .container {
+    padding: 30px ;
+  }
+  .content{
+    padding: 20px;
+  }
+  .title{
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .text{
+    text-align: justify;
+  }
+}
+@media  (max-width: 768px) {
+  .container {
+    padding: 50px ;
+  }
+  .content{
+    padding: 20px;
+  }
+  .title{
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .text{
+    text-align: justify;
+    
+  }
+}
