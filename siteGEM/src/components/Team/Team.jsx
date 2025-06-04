@@ -14,7 +14,7 @@ const teamMembers = Array.from({ length: 6 }, (_, i) => ({
   bio: 'Especialista em economia ambiental...',
   image: 'src/assets/image/ex-equipe.avif',
   instagram: '#',
-  linkedin: '#'
+  linkedln: '#'
 }));
 
 

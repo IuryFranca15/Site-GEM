@@ -29,20 +29,20 @@
 .name {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-primary); /* Tailwind 'text-primary' */
+  color: var(--text-color); 
 }
 
 .role {
   display: block;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.3;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .bio {
-  font-size: 0.875rem;
-  color: #4b5563; /* Tailwind 'text-gray-600' */
+  font-size: 1rem;
+  color: var(--text-color); /* Tailwind 'text-gray-600' */
   font-weight: 500;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .icon {
-  color: var(--text-primary);
+  color: var(--text-color);
   font-size: 1.3rem;
   transition: transform 0.3s ease;
 }

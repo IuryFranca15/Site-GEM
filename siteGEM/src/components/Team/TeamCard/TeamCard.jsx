@@ -1,7 +1,7 @@
 import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 import styles from "./TeamCard.module.css";
 
-const TeamCard = ({ name, role, bio, image, instagram, linkedin }) => {
+const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
   return (
     <article className={styles.card}>
       <img
@@ -30,9 +30,9 @@ const TeamCard = ({ name, role, bio, image, instagram, linkedin }) => {
               <FaInstagram className={styles.icon} />
             </a>
           )}
-          {linkedin && (
+          {linkedln && (
             <a
-              href={linkedin}
+              href={linkedln}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`LinkedIn de ${name}`}
