@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 5rem 1rem 5rem 1rem;
-  background-color: #014460;
+  padding: 10rem 1rem 5rem 1rem;
+  background-color: var(--bg-color);
 }
 
 .content{
@@ -20,23 +20,23 @@
   color: white;
   line-height: 1.2;
   text-align: center;
-  padding-bottom: 0.5rem;
 }
 
 .divider {
   width: 23rem;
   height: 2px;
-  background-color: #40b2ab;
+  background-color: var(--bg-secondary);
   margin: 0.5rem auto 0 auto;
 }
 
 .grids{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
 
 .grid{
+  max-width: 350px;
   background-color: #fff;
   border-radius: 10px;
   transition: transform 0.3s ease-out;
@@ -51,6 +51,11 @@
 }
 
 .bgImage{
+  width: 100%;
+  display: block; 
+  object-fit: cover;
+  max-width: 100%;
+  overflow: hidden;
   border-radius: 10px 10px 0 0;
 }
 
@@ -58,7 +63,7 @@
   position: absolute;
   top: -27px;
   right: -16px;
-  width:5rem;
+  width:4rem;
 }
 
 .information{
@@ -70,22 +75,30 @@
 }
 
 .titleGrup {
+  color: var(--text-color);
   font-size:1.2rem ;
   font-weight: 600;
+}
+
+.description{
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.4rem;
 }
 
 .button{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #014460;
+  color: var(--text-color);
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .arrowIcon{
   font-size: 1.25rem;
-  color: #014460;
+  color: var(--text-color);
   transition: transform 0.3s ease-out;
 
 }
@@ -101,6 +114,9 @@
 }
 
 @media (max-width: 640px) {
+  .container{
+    padding: 5rem 1rem 5rem 1rem;
+  }
   .grids {
     grid-template-columns: 1fr;
   }
