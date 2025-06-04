@@ -1,4 +1,4 @@
-import SubGroups from '../Components/SubGroups/SubGroups.jsx'
+import SubGroups from '../components/SubGroups/SubGroups.jsx'
 
 const SubGroupsPage = () => {
   return (

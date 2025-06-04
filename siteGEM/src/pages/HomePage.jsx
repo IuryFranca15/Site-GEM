@@ -1,9 +1,9 @@
-import Header from '../Components/Navbar.jsx'
-import Team from '../Components/Team/Team.jsx'
-import LatestArticles from '../Components/LatestArticles/LatestArticles.jsx'
-import Newsletter from '../Components/Newsletter/Newsletter.jsx'
-import SubGroups from '../Components/SubGroups/SubGroups.jsx'
-import Footer from '../Components/Footer.jsx'
+import Header from '../components/Navbar.jsx'
+import Team from '../components/Team/Team.jsx'
+import LatestArticles from '../components/LatestArticles/LatestArticles.jsx'
+import Newsletter from '../components/Newsletter/Newsletter.jsx'
+import SubGroups from '../components/SubGroups/SubGroups.jsx'
+import Footer from '../components/Footer/Footer.jsx'
 
 const Home = () => {
   return (
