@@ -97,7 +97,7 @@ const SubGrupos = () => {
                 </div>
                 <div className={Styles.information}>
                   <h3 className={Styles.titleGrup}>{grupo.titulo}</h3>
-                  <p>{grupo.descricao}</p>
+                  <p className={Styles.description}>{grupo.descricao}</p>
                   <a href={grupo.link} className={Styles.button}>
                     Saiba mais
                     <IoArrowForwardSharp className={Styles.arrowIcon} />
