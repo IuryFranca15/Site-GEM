@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import TeamCard from './TeamCard/TeamCard';
-import styles from './Team.module.css';
+import styles from './TeamCarousel.module.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
