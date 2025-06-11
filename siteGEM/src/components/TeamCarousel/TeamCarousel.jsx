@@ -18,7 +18,7 @@ const teamMembers = Array.from({ length: 6 }, (_, i) => ({
 }));
 
 
-const Team = () => {
+const TeamCarousel = () => {
   const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -90,4 +90,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default TeamCarousel;
