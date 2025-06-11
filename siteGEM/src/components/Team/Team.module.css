@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10rem 1rem 5rem 1rem;
+  background-color: var(--bg-color);
+}
+
+.content{
+  max-width: 80rem;
+}
+
+.contentTitle {
+  padding-bottom: 3.75rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.divider {
+  width: 16rem;
+  height: 2px;
+  background-color: var(--bg-secondary);
+  margin: 0.5rem auto 0 auto;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .title{
+    font-size: 1.5rem;
+  }
+  .divider{
+    width: 11rem;
+  }
+}
