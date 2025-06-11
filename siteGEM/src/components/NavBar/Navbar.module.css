@@ -74,9 +74,10 @@
   gap: 30px;
   order: 3;
   margin-left: auto;
+ 
 }
 
-.menuLinks a {
+.link {
   font-family: "Montserrat", sans-serif;
   color: var(--text-color);
   text-decoration: none;
@@ -85,9 +86,25 @@
   transition: color 0.3s ease;
 }
 
-.menuLinks a:hover {
+.link:hover {
   color: #00a896;
 }
+.active {
+  color: #00a896;
+}
+
+/* .menuLinks a {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.3s ease;
+} */
+
+/* .menuLinks a:hover {
+  color: #00a896;
+} */
 
 /* ============= RESPONSIVIDADE ============= */
 @media (max-width: 1200px) {
