@@ -1,9 +1,7 @@
 import Team from '../components/Team/Team.jsx'
 
 const TeamPage = () => {
-  return (
-    <Team />
-  )
-}
+  return <Team />;
+};
 
-export default TeamPage
+export default TeamPage;
