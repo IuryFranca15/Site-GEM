@@ -19,9 +19,9 @@ const BackgroundVideo = () => {
       <div className={styles.overlay}>
         <span>Somos o</span>
         <h1 className={styles.heading}>
-          Grupo <br></br>Economia do Mar
+          Grupo Economia do Mar
         </h1>
-        <p>O primeiro grupo de pesquisa brasileiro dedicado ao estudo da economia marinha e seus impactos socioeconômicos e ambientais.</p>
+        <p>O primeiro grupo de pesquisa brasileiro dedicado ao estudo<br /> da economia marinha e seus impactos socioeconômicos e ambientais.</p>
 
         <div className={styles.buttons}>
           <a

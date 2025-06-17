@@ -52,18 +52,20 @@
 }
 
 .heading {
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 700;
   max-width: 72rem; 
   font-family: "Montserrat", sans-serif;
   word-spacing: -13px;
   color: var(--text-color-secondary);
 }
+
 .overlay p {
-  font-size: 1.4rem;
+  padding-top: 15px;
+  font-size: 2rem;
   color: #fff;
-  max-width: 600px;
-  line-height: 1.7rem;
+  max-width: 1000px;
+  line-height: 2.9rem;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -82,7 +84,7 @@
   padding: 10px 14px;
   border-radius: 10px;
   color:#fff;
-  font-size: 1rem;
+  font-size: 1.5rem;
   transition: 0.4s;
   font-weight: 500;
 }
