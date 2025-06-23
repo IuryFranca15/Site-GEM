@@ -29,8 +29,7 @@ def create_tables():
             nome_subgrupo TEXT NOT NULL UNIQUE
         )
     """)
-    
-    # publicacao
+     # publicacao
     cur.execute("""
         CREATE TABLE IF NOT EXISTS publicacao (
             id_publicacao INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -83,7 +82,35 @@ def create_tables():
     
     conn.commit()
     conn.close()
+def insert_subgrupo():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    subgrupos = [
+        'Blue Finance',
+        'Clima e Meio Ambiente',
+        'Conceitos e Métodos',
+        'Defesa',
+        'Defesa e Segurança',
+        'Energias Offshore',
+        'Geopolitica',
+        'Minerais Offshore',
+        'Pesca e Aquicultura',
+        'Transporte Marítimo',
+        'Transportes'
+    ]
+    
+    for subgrupo in subgrupos:
+        try:
+            cur.execute("INSERT INTO subgrupo (nome_subgrupo) VALUES (?)", (subgrupo,))
+        except sqlite3.IntegrityError:
+            pass  # já existe, não insere de novo
 
+    conn.commit()
+    conn.close()
+
+    
+  
 def create_default_admin():
     """Cria o usuário administrador padrão se ele não existir, usando Argon2 para a senha."""
     conn = get_db_connection()
@@ -124,16 +151,16 @@ if __name__ == "__main__":
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute("SELECT * FROM subgrupo WHERE nome_subgrupo = ?", ("Economia Azul",))
+        cur.execute("SELECT * FROM subgrupo WHERE nome_subgrupo = ?", ("Blue Finance",))
         subgrupo_exists = cur.fetchone()
         if not subgrupo_exists:
-            conn.execute("INSERT INTO subgrupo (nome_subgrupo) VALUES (?)", ("Economia Azul",))
+            conn.execute("INSERT INTO subgrupo (nome_subgrupo) VALUES (?)", ("Blue Finance",))
             conn.commit()
-            print("Subgrupo 'Economia Azul' adicionado para exemplo (se não existia).")
+            print("Subgrupo 'Blue Finance' adicionado para exemplo (se não existia).")
         else:
-            print("Subgrupo 'Economia Azul' já existe.")
+            print("Subgrupo 'Blue Finance' já existe.")
     except sqlite3.IntegrityError: 
-        print("Subgrupo 'Economia Azul' já existe (erro de integridade).")
+        print("Subgrupo 'Blue Finance' já existe (erro de integridade).")
     except Exception as e:
         print(f"Erro ao adicionar subgrupo de exemplo: {e}")
     finally:
