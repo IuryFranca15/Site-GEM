@@ -51,7 +51,16 @@ def create_tables():
             FOREIGN KEY (id_publicacao) REFERENCES publicacao(id_publicacao)
         )
     """)
-    
+    # admin
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS admin (
+        id_admin INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome_admin TEXT NOT NULL,
+        email_admin TEXT UNIQUE NOT NULL,
+        hashed_password TEXT NOT NULL, -- Campo para senha hasheada
+        role TEXT NOT NULL DEFAULT 'admin' -- 'admin'
+        )
+    """)  
     # integrantes
     cur.execute("""
         CREATE TABLE IF NOT EXISTS integrantes (
@@ -59,8 +68,6 @@ def create_tables():
             id_subgrupo INTEGER,
             nome_integrante TEXT NOT NULL,
             email_integrante TEXT UNIQUE NOT NULL,
-            hashed_password TEXT NOT NULL, -- Campo para senha hasheada
-            role TEXT NOT NULL DEFAULT 'membro', -- 'admin' ou 'membro'
             FOREIGN KEY (id_subgrupo) REFERENCES subgrupo(id_subgrupo)
         )
     """)
@@ -81,7 +88,7 @@ def create_default_admin():
     """Cria o usuário administrador padrão se ele não existir, usando Argon2 para a senha."""
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM integrantes WHERE email_integrante = ?", (ADMIN_EMAIL,))
+    cur.execute("SELECT * FROM admin WHERE email_admin = ?", (ADMIN_EMAIL,))
     admin_exists = cur.fetchone()
 
     if not admin_exists:
@@ -89,7 +96,7 @@ def create_default_admin():
         hashed_admin_password = pwd_context_models.hash(ADMIN_PASSWORD)
         try:
             cur.execute("""
-                INSERT INTO integrantes (nome_integrante, email_integrante, hashed_password, role)
+                INSERT INTO admin (nome_admin, email_admin, hashed_password, role)
                 VALUES (?, ?, ?, ?)
             """, ("Admin User", ADMIN_EMAIL, hashed_admin_password, "admin"))
             conn.commit()
