@@ -20,7 +20,7 @@
   will-change: transform;
 }
 .ceoCard:hover{
-   transform: scale(1.02) translateY(-0.25rem);
+  transform: scale(1.02) translateY(-0.25rem);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -171,6 +171,12 @@
 }
 .icon{
   width: 50px;
+  transition: transform 0.3s ease;
+
+}
+
+.grid:hover .icon{
+  transform: rotate(6deg) scale(1.05);
 }
 .memberImage{
   width: 120px;
