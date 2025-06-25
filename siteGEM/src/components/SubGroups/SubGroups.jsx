@@ -3,6 +3,7 @@ import Styles from './SubGroups.module.css'
 import { IoArrowForwardSharp } from "react-icons/io5";
 import pesca from '../../assets/image/pesca.jpg'
 import pescaIcone from '../../assets/image/pesca-icone.png'
+import { Link } from 'react-router-dom';
 
 const subgrupos = [
   {
@@ -90,21 +91,23 @@ const SubGrupos = () => {
         <div className={Styles.grids}>
           {subgrupos.map((grupo) => {
             return (
-              <div className={Styles.grid} key={grupo.id}>
-                <div className={Styles.images}>
-                  <img src={grupo.imagemFundo} alt={`Imagem de fundo do grupo ${grupo.titulo}`} className={Styles.bgImage} />
-                  <img src={grupo.icone} alt={`Ícone do grupo ${grupo.titulo}`} className={Styles.icon} />
-                </div>
-                <div className={Styles.information}>
-                  <h3 className={Styles.titleGrup}>{grupo.titulo}</h3>
-                  <p className={Styles.description}>{grupo.descricao}</p>
-                  <a href={grupo.link} className={Styles.button}>
-                    Saiba mais
-                    <IoArrowForwardSharp className={Styles.arrowIcon} />
-                  </a>
+              <Link to={`/grupo/${grupo.id}`} key={grupo.id} className={Styles.link}>
+                <div className={Styles.grid} key={grupo.id}>
+                  <div className={Styles.images}>
+                    <img src={grupo.imagemFundo} alt={`Imagem de fundo do grupo ${grupo.titulo}`} className={Styles.bgImage} />
+                    <img src={grupo.icone} alt={`Ícone do grupo ${grupo.titulo}`} className={Styles.icon} />
+                  </div>
+                  <div className={Styles.information}>
+                    <h3 className={Styles.titleGrup}>{grupo.titulo}</h3>
+                    <p className={Styles.description}>{grupo.descricao}</p>
+                    <a href={grupo.link} className={Styles.button}>
+                      Saiba mais
+                      <IoArrowForwardSharp className={Styles.arrowIcon} />
+                    </a>
 
+                  </div>
                 </div>
-              </div>
+              </Link>
             )
           })}
         </div>
