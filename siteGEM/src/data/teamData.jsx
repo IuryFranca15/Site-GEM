@@ -1,5 +1,5 @@
 import bg from '../assets/image/pesca.jpg'
-import membroEquipe from '../assets/image/Team.webp'
+import membroEquipe from '../assets/image/ex-pessoa.png'
 import icone from '../assets/image/pesca-icone.png'
 import iconeGem from '../assets/logoGemColored.png'
 
