@@ -4,12 +4,15 @@ import styles from "./TeamCard.module.css";
 const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
   return (
     <article className={styles.card}>
-      <img
-        src={image}
-        alt={name}
-        loading="lazy"
-        className={styles.cardImage}
-      />
+      <div className={styles.cardImageContainer}>
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          className={styles.cardImage}
+        />
+
+      </div>
 
       <div className={styles.cardContent}>
         <div>
