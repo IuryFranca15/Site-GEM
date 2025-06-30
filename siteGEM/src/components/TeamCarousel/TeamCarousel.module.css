@@ -81,10 +81,9 @@
   color: #4b5563;
 }
 
-/* Ajustar seta no tablet */
 @media (max-width: 1023px) {
   .navButton {
-    display: block; /* Mostrar setas */
+    display: block; 
     top: auto;
     bottom: -3.5rem;
     transform: none;

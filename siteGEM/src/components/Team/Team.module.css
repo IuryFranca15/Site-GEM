@@ -102,7 +102,7 @@
 .grid{
   max-width: 350px;
   border-radius: 10px;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;  
   will-change: transform;
   overflow: hidden;
 }
@@ -144,12 +144,13 @@
   flex-direction: column;
   align-items: center;
   margin-top: -14px;
-   position: relative;
+  position: relative;
   z-index: 2;
 }
 .contentInformation h3{
   color: var(--text-color);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
   font-family: "Montserrat", sans-serif;
