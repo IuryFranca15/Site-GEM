@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 const subgrupos = [
   {
     id: 1,
-    titulo: 'Pesca e Agricultura',
-    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    titulo: 'Clima e Meio Ambiente',
+    descricao: 'Analisa o impacto da poluição, mudanças climáticas e uso sustentável dos recursos marinhos, propondo políticas públicas que conciliem desenvolvimento econômico e preservação ambiental.',
     imagemFundo: pesca,
     icone: pescaIcone,
     link: '#'
@@ -17,8 +17,8 @@ const subgrupos = [
 
   {
     id: 2,
-    titulo: 'Pesca e Agricultura',
-    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    titulo: 'Energias Offshore',
+    descricao: 'Energias offshore são fontes de energia geradas no mar, como a eólica (ventos) e as ondas. Elas aproveitam o potencial marítimo para produzir energia limpa e renovável, com menor impacto ambiental.',
     imagemFundo: pesca,
     icone: pescaIcone,
     link: '#'
@@ -27,7 +27,7 @@ const subgrupos = [
   {
     id: 3,
     titulo: 'Pesca e Agricultura',
-    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    descricao: 'A pesca e a aquicultura são atividades essenciais da economia do mar. Enquanto a pesca extrai recursos naturais, a aquicultura cria peixes e frutos do mar de forma controlada, garantindo produção sustentável de alimentos.',
     imagemFundo: pesca,
     icone: pescaIcone,
     link: '#'
@@ -35,7 +35,7 @@ const subgrupos = [
 
   {
     id: 4,
-    titulo: 'Pesca e Agricultura',
+    titulo: 'Conceitos e Métodos',
     descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
     imagemFundo: pesca,
     icone: pescaIcone,
@@ -44,7 +44,7 @@ const subgrupos = [
 
   {
     id: 5,
-    titulo: 'Pesca e Agricultura',
+    titulo: 'Defesa e Segurança',
     descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
     imagemFundo: pesca,
     icone: pescaIcone,
@@ -53,7 +53,55 @@ const subgrupos = [
 
   {
     id: 6,
-    titulo: 'Pesca e Agricultura',
+    titulo: 'Blue Finance',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 7,
+    titulo: 'Transporte Marítimo',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 8,
+    titulo: 'Relações Geopolítica',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 9,
+    titulo: 'Transportes e Infraestrutura',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 10,
+    titulo: 'Relações sociais',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 11,
+    titulo: 'Minerais offshore',
+    descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
+    imagemFundo: pesca,
+    icone: pescaIcone,
+    link: '#'
+  },
+  {
+    id: 12,
+    titulo: 'Turismo, esporte e lazer',
     descricao: 'Estuda as atividades pesqueiras sob a perspectiva econômica, social e ambiental. Analisa cadeias produtivas, políticas públicas e sustentabilidade do setor. Seu foco é contribuir com dados e propostas para o desenvolvimento da pesca no Brasil.',
     imagemFundo: pesca,
     icone: pescaIcone,
