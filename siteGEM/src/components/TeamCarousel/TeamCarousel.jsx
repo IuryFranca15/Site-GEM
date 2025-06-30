@@ -8,14 +8,59 @@ import 'swiper/css/navigation';
 
 
 
-const teamMembers = Array.from({ length: 6 }, (_, i) => ({
-  name: `Fulano ${i + 1}`,
-  role: 'Pesquisador(a)',
-  bio: 'Especialista em economia ambiental...',
-  image: 'src/assets/image/ex-equipe.avif',
-  instagram: '#',
-  linkedln: '#'
-}));
+const teamMembers = [
+  {
+    name: 'Nathália Macedo',
+    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
+    image: 'src/assets/image/ex-2.webp',
+    instagram: '#',
+    linkedln: '#'
+  },
+
+  {
+    name: 'Giselle Gomes',
+    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
+    image: 'src/assets/image/ex-3.webp',
+    instagram: '#',
+    linkedln: '#'
+  },
+
+  {
+    name: 'Gabriel Ralile de Figueiredo Magalhães',
+    role: 'Pesquisador do subgrupo Energias Offshore',
+    bio: 'Especialista em energias renováveis e offshore, com foco em geração eólica no mar e transição energética sustentável.',
+    image: 'src/assets/image/ex-1.webp',
+    instagram: '#',
+    linkedln: '#'
+  },
+
+  {
+    name: 'Maria Carolina H. Ribeiro',
+    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
+    image: 'src/assets/image/ex-equipe.avif',
+    instagram: '#',
+    linkedln: '#'
+  },
+  {
+    name: 'Fernanda Moreira Lins',
+    role: 'Pesquisadora do subgrupo Conceitos e Métodos',
+    bio: 'Especialista em conceitos e métodos aplicados à economia do mar, com foco em análise de dados, indicadores e modelagem socioeconômica.',
+    image: 'src/assets/image/ex-2.webp',
+    instagram: '#',
+    linkedln: '#'
+  },
+  {
+    name: 'Thiago Thierry',
+    role: 'Pesquisador do subgrupo Defesa e Segurança',
+    bio: 'Especialista em defesa marítima e segurança costeira, com foco em proteção de recursos marinhos e vigilância estratégica.',
+    image: 'src/assets/image/ex-4.webp',
+    instagram: '#',
+    linkedln: '#'
+  },
+]
 
 
 const TeamCarousel = () => {
