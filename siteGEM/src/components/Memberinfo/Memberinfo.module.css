@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: #014460;
+}
+
+.card {
+    font-family: "Montserrat", sans-serif;
+    background-color: #fdfdfd;
+    border-radius: 30px;
+    padding: 50px;
+    padding-top: 1.2rem;
+    padding-bottom: 1.1rem;
+    max-width: 780px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    color: #002b4f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerinfo {
+    font-family: "Montserrat", sans-serif;
+    margin-left: 20px;
+}
+
+.nameRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 34px;
+    font-weight: bold;
+    color: #014460;
+}
+
+.area {
+    margin-top: 11px;
+    font-size: 18px;
+    color: #014460;
+}
+
+.description {
+    line-height: 1.2rem;
+    margin-top: 10px;
+}
+
+.icons {
+    display: flex;
+    margin-top: 8px;
+}
+
+.icons a {
+    margin-right: 8px;
+    color: #014460;
+    cursor: pointer;
+}
+
+.icon {
+    transition: transform 0.3s ease;
+    font-size: 1.3rem;
+}
+
+.icon:hover {
+    transform: scale(1.4);
+}
+
+.divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 2px solid #40b2ab;
+}
+
+.section {
+    margin-bottom: 16px;
+    line-height: 1.2rem;
+    color: #014460;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    color: #014460;
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.textDetail {
+  font-size: 18px;
+  color: #014460;
+  margin-bottom: 24px;
+  line-height: 1.8rem;
+}
+
+@media (max-width: 600px) {
+  .nameRow {
+  flex-direction: column;
+  align-items: flex-start;
+ }
+
+.icons {
+  margin-top: 6px;
+ }
+}
