@@ -51,7 +51,9 @@ const Team = () => {
                   <img src={membro.foto} alt="Imagem da pessoa" className={Styles.memberImage} />
                   <h3>{membro.nome}</h3>
                   <p>{membro.descricao}</p>
-                  <img src={membro.iconeGrupo} alt="Ícone do subgrupo" className={Styles.icon} />
+                  <div className={Styles.iconWrapper}>
+                    <img src={membro.iconeGrupo} alt="Ícone do subgrupo" className={Styles.icon} />
+                  </div>
                 </div>
               </div>
             </Link>
