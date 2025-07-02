@@ -33,6 +33,11 @@
   background-color: var(--bg-secondary);
   margin: 0.5rem auto 0 auto;
 }
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
 
 .navButton {
   cursor: pointer;
@@ -60,6 +65,8 @@
   right: -1rem;
 }
 
+
+
 @media (max-width: 768px) {
   .navLeft,
   .navRight {
@@ -74,13 +81,6 @@
     font-size: 1.5rem;
   }
 }
-
-.navIcon {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: #4b5563;
-}
-
 @media (max-width: 1023px) {
   .navButton {
     display: block; 

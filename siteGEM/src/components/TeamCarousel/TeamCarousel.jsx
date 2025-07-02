@@ -118,7 +118,7 @@ const TeamCarousel = () => {
             0: { slidesPerView: 1 },
             480: { slidesPerView: 1.3 },
             640: { slidesPerView: 2 },
-            768: { slidesPerView: 2.5 },   // <- Aqui limitamos a 2 cards no tablet
+            768: { slidesPerView: 2.5 },
             1024: { slidesPerView: 3.5 },
             1280: { slidesPerView: 4.5 },
           }}
