@@ -40,10 +40,8 @@ const GroupDetails = () => {
       <div className={Style.content}>
         <div className={Style.members}>
           <h3 className={Style.memberTitle}>Conheça nossa equipe</h3>
+          <TeamCarouselByGroup members={membersByGroup} />
         </div>
-
-        <TeamCarouselByGroup members={membersByGroup} />
-
       </div>
     </div>
   )
