@@ -67,31 +67,29 @@ const TeamCarouselByGroup = ({ members = [] }) => {
 
           {members.map((member) => (
             <SwiperSlide key={member.id}>
-              <div className={styles.grids}>
-                <div className={styles.grid}>
-                  <div className={styles.imageWrapper}>
-                    <img
-                      src={member.bg}
-                      alt="Imagem que representa o subgrupo"
-                      className={styles.bgImage}
-                    />
-                    <div className={styles.overlay}></div>
-                  </div>
+              <div className={styles.card}>
+                <div className={styles.imageWrapper}>
+                  <img
+                    src={member.bg}
+                    alt="Imagem que representa o subgrupo"
+                    className={styles.bgImage}
+                  />
+                  <div className={styles.overlay}></div>
+                </div>
 
-                  <div className={styles.contentInformation}>
-                    <img
-                      src={member.foto}
-                      alt="Imagem da pessoa"
-                      className={styles.memberImage}
-                    />
-                    <h3>{member.nome}</h3>
-                    <p>{member.descricao}</p>
-                    <img
-                      src={member.iconeGrupo}
-                      alt="Ícone do subgrupo"
-                      className={styles.icon}
-                    />
-                  </div>
+                <div className={styles.contentInformation}>
+                  <img
+                    src={member.foto}
+                    alt="Imagem da pessoa"
+                    className={styles.memberImage}
+                  />
+                  <h3>{member.nome}</h3>
+                  <p>{member.descricao}</p>
+                  <img
+                    src={member.iconeGrupo}
+                    alt="Ícone do subgrupo"
+                    className={styles.icon}
+                  />
                 </div>
               </div>
             </SwiperSlide>

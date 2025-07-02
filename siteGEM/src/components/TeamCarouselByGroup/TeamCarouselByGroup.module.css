@@ -1,30 +1,56 @@
 .container {
   width: 100%; 
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .content{
   max-width: 80rem;
   width: 100%;
   margin: 0 auto;
+  position: relative;
 }
 
-.grids{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+.navButton {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border: none;
 }
-.grid{
-  max-width: 350px;
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
+
+
+.navButton:hover {
+  background-color: white;
+}
+
+.navLeft {
+  left: -2.9rem;
+}
+
+.navRight {
+  right: -2.9rem;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
-  transition: transform 0.3s ease-out;
-  will-change: transform;
   overflow: hidden;
+  background: #fff;
+  min-height: 332px
 }
-
-.grid:hover{
-  transform: scale(1.02) translateY(-0.25rem);
-}
-
  .imageWrapper {
   position: relative;
   width: 100%;
@@ -32,14 +58,12 @@
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 }
-
 .bgImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
 .overlay {
   position: absolute;
   top: 0;
@@ -47,26 +71,32 @@
   width: 100%;
   height: 100%;
   background-color: #0daa9b;
-  opacity: 0.5; /* ajuste a opacidade como quiser */
-  pointer-events: none; /* garante que a sobreposição não atrapalhe cliques */
+  opacity: 0.5; 
+  pointer-events: none; 
 }
-
 .contentInformation{
   background-color: #fff;
   border-radius: 20px;
-  padding: 10px 50px;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: -14px;
-   position: relative;
+  position: relative;
   z-index: 2;
+}
+.memberImage{
+  width: 100px;
+  margin-top: -70px;
+  border-radius: 50%;
+  z-index: 40;
 }
 .contentInformation h3{
   color: var(--text-color);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   padding-top: 10px;
   padding-bottom: 10px;
+  text-align: center;
   font-family: "Montserrat", sans-serif;
 }
 .contentInformation span{
@@ -87,15 +117,4 @@
 .icon{
   width: 50px;
   transition: transform 0.3s ease;
-
-}
-
-.grid:hover .icon{
-  transform: rotate(6deg) scale(1.05);
-}
-.memberImage{
-  width: 120px;
-  margin-top: -70px;
-  border-radius: 50%;
-  z-index: 40;
 }
