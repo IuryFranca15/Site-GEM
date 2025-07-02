@@ -6,16 +6,16 @@ import pessoa from '../../assets/image/ex-pessoa.png'
 import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 
 const Memberinfo = () => {
-    const { id } = useParams(); // Pega o ID da URL
-    const membro = teamMembers.find(m => m.id === id); // Busca o membro certo
+  const { id } = useParams(); // Pega o ID da URL
+  const membro = teamMembers.find(m => m.id === id); // Busca o membro certo
 
   if (!membro) {
     return <h2>Membro não encontrado!</h2>;
   }
 
   return (
-    
-      <div className={styles.card}>
+
+    <div className={styles.card}>
       <div className={styles.header}>
         <img src={pessoa} alt="Imagem da pessoa" className={styles.photo} />
         <div className={styles.headerinfo}>
@@ -41,11 +41,11 @@ const Memberinfo = () => {
               </a>
             </div>
           </div>
-          {/*<h2 className={styles.area}>{membro.grupo}</h2> */} 
+          {/*<h2 className={styles.area}>{membro.grupo}</h2> */}
           <p className={styles.area}>Pesca e agricultura</p>
           {/* <p className={styles.description}>{membro.descricao}</p> */}
           <p className={styles.description}>
-            Especialista em economia ambiental e <br/> desenvolvimento sustentável, com foco em valoração<br />de recursos marinhos.
+            Especialista em economia ambiental e <br /> desenvolvimento sustentável, com foco em valoração<br />de recursos marinhos.
           </p>
         </div>
       </div>
@@ -68,22 +68,22 @@ const Memberinfo = () => {
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>FORMAÇÃO ACADÊMICA</h3>
         <p className={styles.textDetail}><strong>Fundação Getulio Vargas – FGV Direito Rio</strong><br />
-        Doutorado em Direito da Regulação</p>
+          Doutorado em Direito da Regulação</p>
 
         <p className={styles.textDetail}><strong>Escola de Guerra Naval</strong><br />
-        Mestrado em Estudos Marítimos</p>
+          Mestrado em Estudos Marítimos</p>
 
         <p className={styles.textDetail}><strong>Universidade Federal do Rio de Janeiro – UFRJ</strong><br />
-        MBE/A em Comércio Exterior</p>
+          MBE/A em Comércio Exterior</p>
 
         <p className={styles.textDetail}><strong>Universidade Federal do Estado do Rio de Janeiro – UNIRIO</strong><br />
-        Bacharelado em Direito</p>
+          Bacharelado em Direito</p>
 
         <p className={styles.textDetail}><strong>Pontifícia Universidade Católica do Rio de Janeiro – PUC-Rio</strong><br />
-        Bacharelado em Relações Internacionais</p>
+          Bacharelado em Relações Internacionais</p>
       </div>
     </div>
-    
+
   )
 }
 
