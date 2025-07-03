@@ -17,11 +17,11 @@ const cards = [
   { image: post5, title: "Assine nossa newsletter", text: "" }
 ];
 
-const LatestArticles = () => {
+const LatestArticles = ({ title = "Últimas matérias" }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Últimas matérias</h2>
+        <h2 className={styles.title}>{title}</h2>
         <div className={styles.grid}>
           {cards.map((card, index) => (
             <ArticleCard
