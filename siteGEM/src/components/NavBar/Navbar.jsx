@@ -40,6 +40,15 @@ const Navbar = () => {
     setSobreOpen(prev => !prev)
   }
 
+const [mostrarInput, setMostrarInput] = useState(false);
+const inputRef = useRef(null);
+
+useEffect(() => {
+  if (mostrarInput && inputRef.current) {
+    inputRef.current.focus();
+  }
+}, [mostrarInput]);
+
   // Cleanup do timeout
   useEffect(() => {
     return () => {
@@ -60,17 +69,6 @@ const Navbar = () => {
             className={styles.logoImg}
           />
         </NavLink>
-      </div>
-
-      <div className={styles.pesquisaContainer}>
-        <input
-          type="text"
-          placeholder='Pesquisar'
-          className={styles.inputPesquisa}
-        />
-        <button className={styles.pesquisaButton}>
-          <FaSearch className={styles.pesquisaIcone} />
-        </button>
       </div>
 
       <div className={styles.menuLinks}>
@@ -138,6 +136,22 @@ const Navbar = () => {
         <NavLink to='/contato' className={({ isActive }) =>
           `${styles.link} ${isActive ? styles.active : ''}`
         }>Contato</NavLink>
+
+        <div className={styles.pesquisaContainer}>
+            <input
+              type="text"
+              placeholder="Pesquisar"
+              className={`${styles.inputPesquisa} ${mostrarInput ? styles.ativo : ''}`}
+              ref={inputRef}
+            />
+            <button
+              className={styles.pesquisaButton}
+              onClick={() => setMostrarInput(prev => !prev)}
+              aria-label="Pesquisar"
+            >
+              <FaSearch className={styles.pesquisaIcone} />
+            </button>
+          </div>
       </div>
 
     </nav>
