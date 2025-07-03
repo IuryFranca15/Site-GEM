@@ -1,0 +1,24 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root{
+   --text-color:#014460;
+   --text-color-secondary:#40b2ab;
+   --bg-color: #014460;
+   --bg-secondary: #40b2ab;
+}
+
+.mySwiper {
+  overflow: visible;
+}
+
+.swiper-slide.dimmed {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
