@@ -4,6 +4,12 @@
   padding-right: 1rem;
 }
 
+.swiper-slide{
+  height: auto !important;
+  display: flex;
+  align-items: center;
+}
+
 .content{
   max-width: 80rem;
   width: 100%;
@@ -49,7 +55,7 @@
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
-  min-height: 332px
+  height: 100%;
 }
  .imageWrapper {
   position: relative;

@@ -6,7 +6,7 @@ import iconeGem from '../assets/logoGemColored.png'
 const teamMembers = [
   {
     id: '1',
-    grupoId: '1',
+    grupoId: '',
     bg: bg,
     foto: membroEquipe,
     nome: 'Thauan Santos',

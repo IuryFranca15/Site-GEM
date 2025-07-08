@@ -1,40 +1,74 @@
-import styles from './TeamCarouselByGroup.module.css'
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useRef } from 'react';
+
+import styles from './TeamCarouselByGroup.module.css';
 
 const TeamCarouselByGroup = ({ members = [] }) => {
   const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
+  // Função para igualar alturas dos cards
+  useEffect(() => {
+    const equalizeCardHeights = () => {
+      const cards = document.querySelectorAll('.swiper-slide .card');
+      if (!cards.length) return;
+
+      cards.forEach(card => {
+        card.style.height = 'auto';
+      });
+
+      const maxHeight = Math.max(...Array.from(cards).map(card => card.offsetHeight));
+
+      cards.forEach(card => {
+        card.style.height = `${maxHeight}px`;
+      });
+    };
+
+    setTimeout(() => {
+      equalizeCardHeights();
+    }, 300);
+
+    window.addEventListener('resize', equalizeCardHeights);
+    return () => {
+      window.removeEventListener('resize', equalizeCardHeights);
+    };
+  }, []);
+
+  // Função para destacar o slide parcialmente visível com classe 'dimmed'
   const highlightPartialSlide = (swiper) => {
     swiper.slides.forEach((slide) => {
       slide.classList.remove('dimmed');
     });
-    const partialIndex = swiper.activeIndex + 4;
+
+    const partialIndex = swiper.activeIndex + Math.floor(swiper.params.slidesPerView);
     const partialSlide = swiper.slides[partialIndex];
     if (partialSlide) {
       partialSlide.classList.add('dimmed');
     }
   };
 
-  if (!members.length) {
-    return <p className={styles.noMembers}>Nenhum membro encontrado para este grupo.</p>
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <button aria-label='Slide anterior' ref={prevRef} className={`${styles.navButton} ${styles.navLeft}`}>
+        <button
+          aria-label='Slide anterior'
+          ref={prevRef}
+          className={`${styles.navButton} ${styles.navLeft}`}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
-        <button aria-label='Próximo Slide' ref={nextRef} className={`${styles.navButton} ${styles.navRight}`}>
+        <button
+          aria-label='Próximo Slide'
+          ref={nextRef}
+          className={`${styles.navButton} ${styles.navRight}`}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
@@ -64,10 +98,9 @@ const TeamCarouselByGroup = ({ members = [] }) => {
             1280: { slidesPerView: 4.5 },
           }}
         >
-
           {members.map((member) => (
             <SwiperSlide key={member.id}>
-              <div className={styles.card}>
+              <div className={`${styles.card} card`}>
                 <div className={styles.imageWrapper}>
                   <img
                     src={member.bg}
@@ -95,11 +128,10 @@ const TeamCarouselByGroup = ({ members = [] }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default TeamCarouselByGroup 
+export default TeamCarouselByGroup;
+
