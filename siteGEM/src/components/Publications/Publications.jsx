@@ -138,7 +138,6 @@ const Publications = () => {
               />
             </div>
           </div>
-
         </div>
 
         <div className={styles.wrapperPublications}>
