@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Styles from './LoginPopup.module.css';
 import logo from '../../assets/logoGemColored.png';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const LoginPopup = ({ isOpen, onClose }) => {
   const year = new Date().getFullYear();
@@ -8,6 +9,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden';
@@ -51,16 +53,29 @@ const LoginPopup = ({ isOpen, onClose }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Digite seu usuário"
+            required
           />
           {errors.username && <span className={Styles.error}>{errors.username}</span>}
 
           <label>Senha</label>
+          <div className={Styles.inputWrapper}>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Digite sua senha"
+            className={Styles.input}
+            required
           />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className={Styles.revealButton}
+            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+          > {showPassword ? <FiEyeOff /> : <FiEye /> } </button>
+
+          </div>
           {errors.password && <span className={Styles.error}>{errors.password}</span>}
 
           <button className={Styles.enterButton} onClick={validateLogin}>Entrar</button>

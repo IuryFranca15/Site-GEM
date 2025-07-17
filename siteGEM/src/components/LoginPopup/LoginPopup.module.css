@@ -162,6 +162,33 @@
   margin-top: -6px;
 }
 
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.revealButton {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #444;
+  transition: transform 0.2s ease;
+}
+
+.reveal:hover {
+  transform: scale(1.1);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .loginCard {
