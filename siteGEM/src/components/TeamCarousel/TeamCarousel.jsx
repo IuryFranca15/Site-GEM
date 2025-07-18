@@ -119,6 +119,7 @@ const TeamCarousel = () => {
           onSlideChange={(swiper) => {
             highlightPartialSlide(swiper);
           }}
+          slidesPerGroup={2}
           spaceBetween={20}
           modules={[Navigation, Autoplay]}
           autoplay={{
