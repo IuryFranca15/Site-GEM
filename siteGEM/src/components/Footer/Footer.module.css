@@ -54,8 +54,8 @@
 .footerLinksWrapper {
   flex: 1;
   display: flex;
-  justify-content: center;
-  margin-right: -25rem;
+  justify-content: flex-end;
+  padding-right: 21rem;
 }
 
 .footerLinks {
