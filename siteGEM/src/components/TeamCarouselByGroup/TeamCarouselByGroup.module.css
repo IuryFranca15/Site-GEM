@@ -1,0 +1,126 @@
+.container {
+  width: 100%; 
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.swiper-slide{
+  height: auto !important;
+  display: flex;
+  align-items: center;
+}
+
+.content{
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.navButton {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border: none;
+}
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
+
+
+.navButton:hover {
+  background-color: white;
+}
+
+.navLeft {
+  left: -2.9rem;
+}
+
+.navRight {
+  right: -2.9rem;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  height: 100%;
+}
+ .imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0daa9b;
+  opacity: 0.5; 
+  pointer-events: none; 
+}
+.contentInformation{
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -14px;
+  position: relative;
+  z-index: 2;
+}
+.memberImage{
+  width: 100px;
+  margin-top: -70px;
+  border-radius: 50%;
+  z-index: 40;
+}
+.contentInformation h3{
+  color: var(--text-color);
+  font-size: 1.2rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+.contentInformation span{
+  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-weight: 500;
+  padding-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.contentInformation p{
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+.icon{
+  width: 50px;
+  transition: transform 0.3s ease;
+}
