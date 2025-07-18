@@ -184,6 +184,95 @@ const teamMembers = [
     iconeGrupo: icone
   },
 
+  {
+    id: '17',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '18',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal2',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '19',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal3',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '20',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal3',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '21',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal4',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '21',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal4',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '22',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal5',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+  {
+    id: '23',
+    grupoId: '3',
+    bg: bg,
+    foto: membroEquipe,
+    nome: 'Fulana de tal4',
+    grupo: 'Pesca e Agricultura',
+    descricao: 'Pesquisadora do subgrupo Pesca e Agricultura',
+    formacao: 'Universidade Federal do Rio de Janeiro, Estudante Bacharel em Defesa e Gestão Estratégica Internacional ',
+    iconeGrupo: icone
+  },
+
 ]
 
 export default teamMembers
