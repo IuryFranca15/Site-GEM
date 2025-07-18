@@ -1,65 +1,160 @@
-import Styles from './Team.module.css'
-import teamMembers from '../../data/teamData.jsx';
-import { Link } from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import { motion } from 'framer-motion';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import styles from './Team.module.css';
+
+import teamMembers from '../../data/teamData';
+import groupData from '../../data/groupData';
 
 const Team = () => {
-  const ceo = teamMembers[0]
-  const otherMembers = teamMembers.slice(1)
+  const swiperRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  useEffect(() => {
+    const equalizeCardHeights = () => {
+      const cards = document.querySelectorAll('.swiper-slide .card');
+      if (!cards.length) return;
+
+      cards.forEach(card => {
+        card.style.height = 'auto';
+      });
+
+      const maxHeight = Math.max(...Array.from(cards).map(card => card.offsetHeight));
+
+      cards.forEach(card => {
+        card.style.height = `${maxHeight}px`;
+      });
+    };
+
+    setTimeout(() => {
+      equalizeCardHeights();
+    }, 100);
+
+    window.addEventListener('resize', equalizeCardHeights);
+    return () => {
+      window.removeEventListener('resize', equalizeCardHeights);
+    };
+  }, []);
+
+  const highlightPartialSlide = (swiper) => {
+    swiper.slides.forEach((slide) => {
+      slide.classList.remove('dimmed');
+    });
+    const partialIndex = swiper.activeIndex + 4;
+    const partialSlide = swiper.slides[partialIndex];
+    if (partialSlide) {
+      partialSlide.classList.add('dimmed');
+    }
+  };
 
   return (
-    <div className={Styles.container}>
-      <div className={Styles.content}>
-        <div className={Styles.contentTitle}>
-          <h2 className={Styles.title}>Conheça nossa equipe</h2>
-          <div className={Styles.divider}></div>
-        </div>
+    <div className={styles.container}>
+      <motion.h2
+        className={styles.title}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.8 }}
+      >
+        Conheça nossa equipe
+      </motion.h2>
 
-        <div className={Styles.ceoContainer}>
-          <Link to={`/equipe/${ceo.id}`} key={ceo.id} className={Styles.link} aria-label={`Ver detalhes de ${ceo.nome}`}>
-            <div className={Styles.ceoCard}>
-              <div className={Styles.ceoImgCard}>
-                <img
-                  src={ceo.foto}
-                  alt={`Foto de ${ceo.nome}`}
-                  className={Styles.ceoImage}
-                />
+      {groupData.map((grupo) => {
+        const membrosDoGrupo = teamMembers.filter(m => m.grupoId === grupo.id);
+        if (membrosDoGrupo.length === 0) return null;
 
-              </div>
-              <div className={Styles.ceoCardContent}>
-                <h3>{ceo.nome}</h3>
-                <span>{ceo.grupo}</span>
-                <p>{ceo.descricao}</p>
-                <img
-                  src={ceo.iconeGrupo}
-                  alt={`Ícone do grupo ${ceo.grupo}`}
-                  className={Styles.ceoCardIcon}
-                />
-              </div>
-            </div>
-          </Link>
-        </div>
+        return (
+          <motion.section
+            key={grupo.id}
+            className={styles.groupSection}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.4 }}
+          >
+            <motion.h2
+              className={styles.groupTitle}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, amount: 0.8 }}
+            >
+              {grupo.nomeGrupo}
+            </motion.h2>
 
-        <div className={Styles.grids}>
-          {otherMembers.map((membro) => (
-            <Link to={`/equipe/${membro.id}`} key={membro.id} className={Styles.link} aria-label={`Ver detalhes de ${membro.nome}`}>
-              <div className={Styles.grid}>
-                <div className={Styles.imageWrapper}>
-                  <img src={membro.bg} alt="Imagem que representa o subgrupo" className={Styles.bgImage} />
-                  <div className={Styles.overlay}></div>
-                </div>
-                <div className={Styles.contentInformation}>
-                  <img src={membro.foto} alt="Imagem da pessoa" className={Styles.memberImage} />
-                  <h3>{membro.nome}</h3>
-                  <p>{membro.descricao}</p>
-                  <div className={Styles.iconWrapper}>
-                    <img src={membro.iconeGrupo} alt="Ícone do subgrupo" className={Styles.icon} />
+            <button
+              aria-label='Slide anterior'
+              ref={prevRef}
+              className={`${styles.navButton} ${styles.navLeft}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              aria-label='Próximo Slide'
+              ref={nextRef}
+              className={`${styles.navButton} ${styles.navRight}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <Swiper
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.init();
+                swiper.navigation.update();
+                highlightPartialSlide(swiper);
+              }}
+              onSlideChange={(swiper) => highlightPartialSlide(swiper)}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
+              slidesPerGroup={2}
+              spaceBetween={30}
+              modules={[Navigation, Autoplay]}
+              breakpoints={{
+                0: { slidesPerView: 1 },
+                480: { slidesPerView: 1.3 },
+                640: { slidesPerView: 2 },
+                768: { slidesPerView: 2.5 },
+                1024: { slidesPerView: 3.5 },
+                1280: { slidesPerView: 4.5 },
+              }}
+              className={styles.swiper}
+            >
+              {membrosDoGrupo.map((membro) => (
+                <SwiperSlide key={membro.id}>
+                  <div className={`${styles.grid} card`}>
+                    <div className={styles.imageWrapper}>
+                      <img src={membro.bg} alt="Imagem de fundo" className={styles.bgImage} />
+                      <div className={styles.overlay}></div>
+                    </div>
+                    <div className={styles.contentInformation}>
+                      <img src={membro.foto} alt={`Foto de ${membro.nome}`} className={styles.memberImage} />
+                      <h3>{membro.nome}</h3>
+                      <p>{membro.descricao}</p>
+                      <div className={styles.iconWrapper}>
+                        <img src={membro.iconeGrupo} alt="Ícone do grupo" className={styles.icon} />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </motion.section>
+        );
+      })}
     </div>
   );
 };
