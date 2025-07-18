@@ -98,6 +98,7 @@ const groupData = [
     descricao: 'Breve resumo do subgrupo, falando um pouco do que a equipe está responsável etc etc etc',
     bg: bg,
   },
+
 ]
 
 export default groupData
