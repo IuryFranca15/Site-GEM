@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from './PolicyBriefs.module.css';
 import book from '../../assets/image/book-1.avif';
+import { motion } from "framer-motion";
 
 const PolicyBriefs = ({ images = [] }) => {
   // Define imagens padrão com links
@@ -20,7 +21,15 @@ const PolicyBriefs = ({ images = [] }) => {
 
   return (
     <div className={styles.carouselContainer}>
-      <h2 className={styles.title}>Confira os últimos policy briefs</h2>
+      <motion.h2
+        className={styles.title}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.8 }}
+      >
+        Confira os últimos policy briefs
+      </motion.h2>
       <div className={styles.carouselWrapper}>
         <button className={styles.arrowLeft} onClick={prevSlide}>&lt;</button>
         <div className={styles.carousel}>

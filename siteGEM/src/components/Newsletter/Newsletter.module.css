@@ -8,14 +8,16 @@
   background-position: center;
   background-repeat: no-repeat ;
 
-  background-color: rgba(1, 68, 96, 0.6); 
+  background-color: rgba(1, 68, 96, 0.8); 
   background-blend-mode: multiply; 
+
 }
 
 .content {
   max-width: 900px ;
   padding: 80px 100px 80px 100px;
   background-color:#014460 ;
+  /* background-color: #022939; */
   border-radius: 10px;
 }
 
