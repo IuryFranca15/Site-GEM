@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import TeamCard from './TeamCard/TeamCard';
 import styles from './TeamCarousel.module.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
+import { motion } from "framer-motion";
 
 
 const teamMembers = [
@@ -83,8 +83,16 @@ const TeamCarousel = () => {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.heading}>
-          <h2 className={styles.title}>Nossa equipe</h2>
-          <div className={styles.divider}></div>
+          <motion.h2
+            className={styles.title}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.8 }}
+          >
+            Nossa equipe
+          </motion.h2>
+          {/* <div className={styles.divider}></div> */}
         </div>
 
         <button aria-label='Slide anterior' ref={prevRef} className={`${styles.navButton} ${styles.navLeft}`}>
@@ -112,7 +120,11 @@ const TeamCarousel = () => {
             highlightPartialSlide(swiper);
           }}
           spaceBetween={20}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false
+          }}
           className={styles.mySwiper}
           breakpoints={{
             0: { slidesPerView: 1 },
@@ -123,13 +135,13 @@ const TeamCarousel = () => {
             1280: { slidesPerView: 4.5 },
           }}
         >
-
           {teamMembers.map((member, i) => (
             <SwiperSlide key={i}>
               <TeamCard {...member} />
             </SwiperSlide>
           ))}
         </Swiper>
+
       </div>
     </div>
   );
