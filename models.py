@@ -34,7 +34,8 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS publicacao (
             id_publicacao INTEGER PRIMARY KEY AUTOINCREMENT,
             id_subgrupo INTEGER,
-            titulo TEXT NOT NULL, 
+            titulo TEXT NOT NULL,
+            texto TEXT NOT NULL,
             tipo TEXT NOT NULL,
             data_publicacao DATE,
             FOREIGN KEY (id_subgrupo) REFERENCES subgrupo(id_subgrupo)
