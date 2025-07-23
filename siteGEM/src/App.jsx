@@ -7,6 +7,7 @@ import TeamPage from './pages/TeamPage.jsx'
 import MemberPage from './pages/MemberPage.jsx'
 import GroupPage from './pages/GroupPage.jsx'
 import Publications from './pages/PublicationsPage.jsx'
+import History from './components/History/History.jsx'
 
 import Footer from './components/Footer/Footer.jsx'
 import './index.css'
@@ -24,6 +25,7 @@ function App() {
         <Route path='/subgrupos' element={<SubGroups />} />
         <Route path="/grupo/:id" element={<GroupPage />} />
         <Route path='/publicacoes' element={<Publications />} />
+        <Route path='/historia' element={<History/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

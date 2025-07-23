@@ -44,7 +44,7 @@ const Footer = () => {
                 <h3>Sobre nós</h3>
                 <Link to="/">Missão e Valores</Link>
                 <Link to="/">O que é o GEM</Link>
-                <Link to="/">História</Link>
+                <Link to="/historia">História</Link>
               </div>
 
               <div className={Styles.footerColumn}>

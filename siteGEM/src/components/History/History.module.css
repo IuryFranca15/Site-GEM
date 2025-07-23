@@ -1,0 +1,129 @@
+.container {
+  background: url('../../assets/policyBriefsBackground.png') no-repeat center;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.overlay {
+  width: 100%;
+  padding-top: 140px;
+  padding-bottom: 160px;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  z-index: 2;
+  background: linear-gradient(to right, rgba(1, 68, 96, 2) 30%, rgba(255, 255, 255, 0.4) 60%);
+}
+
+.textWrapper {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+
+.heading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color-secondary);
+}
+
+.overlay p {
+  padding-top: 25px;
+  text-align: justify;
+  font-size: 1.6rem;
+  color: #fff;
+  max-width: 850px;
+  line-height: 2.9rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.logoImg {
+  width: 400px;
+  flex-shrink: 0;
+  padding-top: 100px;
+  margin-right: 400px;
+}
+
+
+@media (max-width: 1024px) {
+  .overlay {
+    background: rgba(1, 68, 96, 0.6);
+    padding: 60px;
+  }
+
+  .heading {
+    font-size: 2.8rem;
+  }
+
+  .overlay p {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    max-width: 100%;
+  }
+
+  .logoImg {
+    width: 250px;
+    align-self: center;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .overlay {
+    background: rgba(1, 68, 96, 0.6);
+    padding: 50px 40px 100px 40px;
+    align-items: center;
+  }
+
+  .heading {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  .overlay p {
+    font-size: 1.3rem;
+    line-height: 2.1rem;
+  }
+
+  .logoImg {
+    width: 200px;
+    align-self: center;
+    margin-top: 20px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  .overlay {
+    background: rgba(1, 68, 96, 0.6);
+    padding: 40px 20px 80px 20px;
+    align-items: center;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .overlay p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
+
+  .logoImg {
+    width: 150px;
+    margin-top: 20px;
+    align-self: center;
+  }
+}
