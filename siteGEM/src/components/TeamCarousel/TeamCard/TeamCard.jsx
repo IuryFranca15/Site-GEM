@@ -21,7 +21,6 @@ const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
           <div className={styles.cardContent}>
             <div>
               <h2 className={styles.name}>{name}</h2>
-              <span className={styles.role}>{role}</span>
             </div>
             <div>
               <p className={styles.bio}>{bio}</p>
