@@ -53,13 +53,11 @@
   width: 400px;
   flex-shrink: 0;
   padding-top: 100px;
-  margin-right: 400px;
 }
 
 
 @media (max-width: 1024px) {
   .overlay {
-    background: rgba(1, 68, 96, 0.6);
     padding: 60px;
   }
 
@@ -76,13 +74,13 @@
   .logoImg {
     width: 250px;
     align-self: center;
+    padding-left: 50px;
   }
 }
 
 /* Tablets */
 @media (max-width: 768px) {
   .overlay {
-    background: rgba(1, 68, 96, 0.6);
     padding: 50px 40px 100px 40px;
     align-items: center;
   }
@@ -100,7 +98,6 @@
   .logoImg {
     width: 200px;
     align-self: center;
-    margin-top: 20px;
   }
 }
 
@@ -122,8 +119,15 @@
   }
 
   .logoImg {
-    width: 150px;
-    margin-top: 20px;
+    
     align-self: center;
   }
+}
+
+@media (max-width: 1600px) {
+  
+  .logoImg {
+    padding-left: 80px;
+  }
+
 }
