@@ -26,8 +26,7 @@
   gap: 35px;
   max-width: 600px;
   flex: 1;
-  flex-wrap: wrap;
-  
+  flex-wrap: nowrap;
 }
 
 .footerLogoImg {
@@ -49,6 +48,8 @@
 .footerDescription p {
   font-size: 14px;
   line-height: 1.5;
+  word-break: break-word;
+  max-width: 100%; 
 }
 
 .footerLinksWrapper {
@@ -163,6 +164,7 @@
   }
 
   .footerDescription p {
+    font-size: 16px;
     text-align: justify;
   }
 
@@ -198,7 +200,6 @@
   }
 
   .footerDescription p {
-    font-size: 13px;
     line-height: 1.4;
     text-align: justify;
   }
@@ -210,19 +211,27 @@
   }
 
   .footerColumn h3 {
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .footerColumn a {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .footerBottom {
-    font-size: 13px;
+    font-size: 17px;
     padding-top: 25px;
   }
 
   .footerLegalLinks {
     gap: 10px;
   }
+} 
+
+@media (min-width: 601px) and (max-width: 1600px) {
+
+  .footerLinksWrapper {
+    padding-right: 4rem;
+  }
+  
 }

@@ -22,9 +22,7 @@ const Footer = () => {
             <div className={Styles.footerDescription}>
               <h1>Grupo Economia do Mar</h1>
               <p>
-                O primeiro grupo de pesquisa brasileiro dedicado ao estudo da <br />
-                economia marinha e seus impactos socioeconômicos e <br />
-                ambientais.
+                O primeiro grupo de pesquisa brasileiro dedicado ao estudo da economia marinha e seus impactos socioeconômicos e ambientais.
               </p>
             </div>
           </div>
