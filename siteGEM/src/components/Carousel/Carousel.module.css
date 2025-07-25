@@ -1,0 +1,136 @@
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.title {
+  font-size: 1.4rem;
+  color: #fafafa;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+}
+
+.divider {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--bg-secondary);
+  margin-bottom: 0.875rem;
+}
+
+
+.carouselWrapper {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.swiper {
+  padding: 1rem 0;
+}
+
+.card {
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.dimmed {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.navButton:hover {
+  background: #f0f0f0;
+}
+
+.navLeft {
+  left: -20px;
+}
+
+.navRight {
+  right: -20px;
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+  color: #333;
+} 
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.content {
+  position: relative;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.cardText {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.navLeft {
+  left: -20px;
+}
+
+.navRight {
+  right: -20px;
+}
+.lastVisible {
+  opacity: 0.4;
+  transition: opacity 0.3s ease-in-out;
+}
