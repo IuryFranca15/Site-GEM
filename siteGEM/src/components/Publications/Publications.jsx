@@ -1,151 +1,98 @@
-import { useState } from 'react';
-import { Range, getTrackBackground } from 'react-range';
-import LatestArticles from '../LatestArticles/LatestArticles';
-import styles from './Publication.module.css'
-import { FaSearch } from "react-icons/fa";
 
-const MIN = 2000;
-const MAX = 2025;
+import { useState } from "react";
+import PostFilters from "../PostFilters/PostFilters";
+import Carousel from "../Carousel/Carousel";
+import CardsGrid from "../CardGrids/CardGrids";
 
-const Publications = () => {
-  const [values, setValues] = useState([2010, 2020]);
+import post1 from "../../assets/image/post1.avif";
+import post2 from "../../assets/image/post2.avif";
+import post3 from "../../assets/image/post3.avif";
+import style from './Publication.module.css'
+
+const dados = [
+  { id: 1, image: post1, title: "Publicação A", group: "Clima e meio ambiente", type: "Livro", year: 2010 },
+  { id: 2, image: post2, title: "Publicação B", group: "Energias offshore", type: "Policy Brief", year: 2018 },
+  { id: 3, image: post3, title: "Publicação C", group: "Pesca e aquicultura", type: "Relatório", year: 2015 },
+  { id: 4, image: post2, title: "Publicação D", group: "Clima e meio ambiente", type: "Notícia", year: 2012 },
+  { id: 5, image: post1, title: "Publicação E", group: "Blue Finance", type: "Artigo", year: 2020 },
+];
+
+const allGroups = [
+  "Blue Finance",
+  "Clima e meio ambiente",
+  "Conceitos e métodos",
+  "Construção e reparação naval",
+  "Defesa e segurança",
+  "Energias offshore",
+  "Minerais offshore",
+  "Pesca e aquicultura",
+  "Relações geopolíticas",
+  "Relações sociais",
+  "Transporte e infraestrutura",
+  "Turismo, esporte e lazer",
+];
+
+const allTypes = ["Livro", "Policy Brief", "Relatório", "Artigo", "Notícia"];
+
+export default function Publications() {
+  const [filtros, setFiltros] = useState({
+    groups: [],
+    types: [],
+    search: "",
+    yearRange: [1990, new Date().getFullYear()],
+  });
+
+  // Filtragem
+  const filtrarDados = () => {
+    return dados.filter((item) => {
+      const matchGroup = filtros.groups.length === 0 || filtros.groups.includes(item.group);
+      const matchType = filtros.types.length === 0 || filtros.types.includes(item.type);
+      const matchSearch = filtros.search === "" || item.title.toLowerCase().includes(filtros.search.toLowerCase());
+      const matchYear = item.year >= filtros.yearRange[0] && item.year <= filtros.yearRange[1];
+      return matchGroup && matchType && matchSearch && matchYear;
+    });
+  };
+
+  const dadosFiltrados = filtrarDados();
+
+  // Randomiza os dados para os carrosséis
+  const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
+  const dadosSubgrupos = shuffleArray(dados).slice(0, 5);
+  const dadosNatureza = shuffleArray(dados).slice(0, 5);
+
+  const filtrosAtivos = !!(
+    filtros.groups.length ||
+    filtros.types.length ||
+    filtros.search.trim() ||
+    filtros.yearRange[0] !== 1990 ||
+    filtros.yearRange[1] !== new Date().getFullYear()
+  );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.filters}>
-          <div className={styles.filterSearch}>
-            <div className={styles.containerSearch}>
-              <input
-                type="text"
-                placeholder='Pesquisar'
-                className={styles.searchInput}
-              />
-              <button className={styles.ButtonSearch}>
-                <FaSearch className={styles.IconSearch} />
-              </button>
-            </div>
-          </div>
+    <div className={style.container}>
+      <div className={style.content}>
+        <div className={style.filtros}>
+          <PostFilters
+            allGroups={allGroups}
+            allTypes={allTypes}
+            onFilterChange={(novoFiltro) => setFiltros(novoFiltro)}
+          />
 
-          <div className={styles.filterSubgroups}>
-            <h3 className={styles.titlesubgroups}>Subgrupos</h3>
-            <div className={styles.divider}></div>
-            <div className={styles.checkboxWrapper}>
-              <input id='Clima-meio-ambiente' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Clima-meio-ambiente" className={styles.label}>Clima e meio ambiente</label>
-            </div>
-
-            <div className={styles.checkboxWrapper}>
-              <input id='Energias-offshore' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Energias-offshore" className={styles.label}>Energias offshore</label>
-            </div>
-
-            <div className={styles.checkboxWrapper}>
-              <input id='Pesca-agricultura' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Pesca-agricultura" className={styles.label}>Pesca e agricultura</label>
-            </div>
-
-            <div className={styles.checkboxWrapper}>
-              <input id='Conceitos-metodos' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Conceitos-metodos" className={styles.label}>Conceitos e métodos</label>
-            </div>
-          </div>
-
-          <div className={styles.filterNatureOfPublication}>
-            <h3 className={styles.titlesubgroups}>Natureza da publicação</h3>
-            <div className={styles.divider}></div>
-            <div className={styles.checkboxWrapper}>
-              <input id='Clima-meio-ambiente' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Clima-meio-ambiente" className={styles.label}>Livro</label>
-            </div>
-
-            <div className={styles.checkboxWrapper}>
-              <input id='Energias-offshore' type="checkbox" className={styles.checkbox} />
-              <label htmlFor="Energias-offshore" className={styles.label}>Policy Briefs</label>
-            </div>
-          </div>
-
-          <div>
-            <h3 className={styles.titlesubgroups}>Ano da publicação</h3>
-            <div className={styles.divider}></div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.5rem'
-              }}
-            >
-              <div
-                style={{
-                  color: '#fff'
-                }}>
-                {values[0]} até {values[1]}
-              </div>
-
-              <Range
-                step={1}
-                min={MIN}
-                max={MAX}
-                values={values}
-                onChange={setValues}
-                renderTrack={({ props, children }) => (
-                  <div
-                    onMouseDown={props.onMouseDown}
-                    onTouchStart={props.onTouchStart}
-                    style={{
-                      ...props.style,
-                      height: '36px',
-                      display: 'flex',
-                      width: '100%',
-                    }}
-                  >
-                    <div
-                      ref={props.ref}
-                      style={{
-                        height: '6px',
-                        width: '100%',
-                        borderRadius: '4px',
-                        background: getTrackBackground({
-                          values,
-                          colors: ['#ccc', '#0d9488', '#ccc'],
-                          min: MIN,
-                          max: MAX,
-                        }),
-                        alignSelf: 'center',
-                      }}
-                    >
-                      {children}
-                    </div>
-                  </div>
-                )}
-                renderThumb={({ props }) => (
-                  <div
-                    {...props}
-                    style={{
-                      ...props.style,
-                      height: '16px',
-                      width: '16px',
-                      borderRadius: '50%',
-                      backgroundColor: '#00a896',
-                      cursor: 'pointer',
-                      boxShadow: '0 0 0 2px white',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  />
-                )}
-              />
-            </div>
-          </div>
         </div>
 
-        <div className={styles.wrapperPublications}>
-          <LatestArticles />
+        {/* Lado direito: carrosséis ou grid */}
+        <div style={{ flex: 1 }}>
+          {!filtrosAtivos ? (
+            <>
+              <Carousel title="Publicações por Subgrupos" data={dadosSubgrupos} />
+              <Carousel title="Natureza das Publicações" data={dadosNatureza} />
+            </>
+          ) : (
+            <CardsGrid data={dadosFiltrados} />
+          )}
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Publications
+    </div>
+  );
+}
