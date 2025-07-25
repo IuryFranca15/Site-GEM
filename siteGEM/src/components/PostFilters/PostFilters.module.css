@@ -27,7 +27,8 @@
   padding: 8px 40px 8px 20px;
   border-radius: 10px;
   border: 1px solid #c3c3c3;
-  color: white;
+  color: #000;
+  outline: none;
 }
 
 .ButtonSearch {
