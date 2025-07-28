@@ -19,7 +19,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-// Função para abrir dropdown
+  // Função para abrir dropdown
   const openSobre = () => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current)
@@ -40,14 +40,14 @@ const Navbar = () => {
     setSobreOpen(prev => !prev)
   }
 
-const [mostrarInput, setMostrarInput] = useState(false);
-const inputRef = useRef(null);
+  const [mostrarInput, setMostrarInput] = useState(false);
+  const inputRef = useRef(null);
 
-useEffect(() => {
-  if (mostrarInput && inputRef.current) {
-    inputRef.current.focus();
-  }
-}, [mostrarInput]);
+  useEffect(() => {
+    if (mostrarInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [mostrarInput]);
 
   // Cleanup do timeout
   useEffect(() => {
@@ -75,7 +75,7 @@ useEffect(() => {
         <NavLink to='/' className={({ isActive }) =>
           `${styles.link} ${isActive ? styles.active : ''}`
         }>Início</NavLink>
-      <li 
+        <li
           className={styles.menuItem}
           ref={dropdownRef}
           onMouseEnter={openSobre}
@@ -95,26 +95,18 @@ useEffect(() => {
           <div className={`${styles.dropdownOverlay} ${isSobreOpen ? styles.dropdownOverlayOpen : ''}`}>
             <ul className={`${styles.dropdownMenu} ${isSobreOpen ? styles.dropdownMenuOpen : ''}`}>
               <li className={styles.dropdownItem}>
-                <NavLink 
-                  to='/missao-valores' 
+                <NavLink
+                  to='/missao-valores'
                   className={({ isActive }) => `${styles.dropdownLink} ${isActive ? styles.active : ''}`}
                   onClick={() => setSobreOpen(false)}
                 >
                   Missão e Valores
                 </NavLink>
               </li>
+
               <li className={styles.dropdownItem}>
-                <NavLink 
-                  to='/o-que-e-gem' 
-                  className={({ isActive }) => `${styles.dropdownLink} ${isActive ? styles.active : ''}`}
-                  onClick={() => setSobreOpen(false)}
-                >
-                  O que é o GEM
-                </NavLink>
-              </li>
-              <li className={styles.dropdownItem}>
-                <NavLink 
-                  to='/historia' 
+                <NavLink
+                  to='/historia'
                   className={({ isActive }) => `${styles.dropdownLink} ${isActive ? styles.active : ''}`}
                   onClick={() => setSobreOpen(false)}
                 >
@@ -138,20 +130,20 @@ useEffect(() => {
         }>Contato</NavLink>
 
         <div className={styles.pesquisaContainer}>
-            <input
-              type="text"
-              placeholder="Pesquisar"
-              className={`${styles.inputPesquisa} ${mostrarInput ? styles.ativo : ''}`}
-              ref={inputRef}
-            />
-            <button
-              className={styles.pesquisaButton}
-              onClick={() => setMostrarInput(prev => !prev)}
-              aria-label="Pesquisar"
-            >
-              <FaSearch className={styles.pesquisaIcone} />
-            </button>
-          </div>
+          <input
+            type="text"
+            placeholder="Pesquisar"
+            className={`${styles.inputPesquisa} ${mostrarInput ? styles.ativo : ''}`}
+            ref={inputRef}
+          />
+          <button
+            className={styles.pesquisaButton}
+            onClick={() => setMostrarInput(prev => !prev)}
+            aria-label="Pesquisar"
+          >
+            <FaSearch className={styles.pesquisaIcone} />
+          </button>
+        </div>
       </div>
 
     </nav>
