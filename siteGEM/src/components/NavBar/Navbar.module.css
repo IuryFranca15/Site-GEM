@@ -147,10 +147,10 @@
 }
 
 .dropdownOverlay {
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 100%;
+  min-width: 200px;
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px); 
   border-bottom: 1px solid #eee;
@@ -170,10 +170,10 @@
 .dropdownMenu {
   list-style: none;
   margin: 0;
-  padding: 20px 0;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 90px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .dropdownMenuOpen {
@@ -197,7 +197,6 @@
   transition: all 0.3s ease;
   display: inline-block;
   white-space: nowrap;
-  padding-left: 750px;
 }
 
 .dropdownLink:hover {
