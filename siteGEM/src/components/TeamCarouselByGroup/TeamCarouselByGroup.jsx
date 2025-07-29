@@ -38,7 +38,6 @@ const TeamCarouselByGroup = ({ members = [] }) => {
     };
   }, []);
 
-  // Função para destacar o slide parcialmente visível com classe 'dimmed'
   const highlightPartialSlide = (swiper) => {
     swiper.slides.forEach((slide) => {
       slide.classList.remove('dimmed');
