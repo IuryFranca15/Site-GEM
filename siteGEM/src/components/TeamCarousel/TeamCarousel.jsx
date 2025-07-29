@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import TeamCard from './TeamCard/TeamCard';
@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 const teamMembers = [
   {
     name: 'Nathália Macedo',
-    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    role: 'Clima e Meio Ambiente',
     bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
     image: 'src/assets/image/ex-2.webp',
     instagram: '#',
@@ -20,7 +20,7 @@ const teamMembers = [
 
   {
     name: 'Giselle Gomes',
-    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    role: 'Clima e Meio Ambiente',
     bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
     image: 'src/assets/image/ex-3.webp',
     instagram: '#',
@@ -28,8 +28,8 @@ const teamMembers = [
   },
 
   {
-    name: 'Gabriel Ralile de Figueiredo Magalhães',
-    role: 'Pesquisador do subgrupo Energias Offshore',
+    name: 'Gabriel Magalhães',
+    role: 'Energias Offshore',
     bio: 'Especialista em energias renováveis e offshore, com foco em geração eólica no mar e transição energética sustentável.',
     image: 'src/assets/image/ex-1.webp',
     instagram: '#',
@@ -37,16 +37,16 @@ const teamMembers = [
   },
 
   {
-    name: 'Maria Carolina H. Ribeiro',
-    role: 'Pesquisadora do subgrupo Clima e Meio Ambiente',
+    name: 'Maria Ribeiro',
+    role: 'Clima e Meio Ambiente',
     bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
     image: 'src/assets/image/ex-equipe.avif',
     instagram: '#',
     linkedln: '#'
   },
   {
-    name: 'Fernanda Moreira Lins',
-    role: 'Pesquisadora do subgrupo Conceitos e Métodos',
+    name: 'Fernanda Lins',
+    role: 'Conceitos e Métodos',
     bio: 'Especialista em conceitos e métodos aplicados à economia do mar, com foco em análise de dados, indicadores e modelagem socioeconômica.',
     image: 'src/assets/image/ex-2.webp',
     instagram: '#',
@@ -54,7 +54,7 @@ const teamMembers = [
   },
   {
     name: 'Thiago Thierry',
-    role: 'Pesquisador do subgrupo Defesa e Segurança',
+    role: 'Defesa e Segurança',
     bio: 'Especialista em defesa marítima e segurança costeira, com foco em proteção de recursos marinhos e vigilância estratégica.',
     image: 'src/assets/image/ex-4.webp',
     instagram: '#',
@@ -92,7 +92,6 @@ const TeamCarousel = () => {
           >
             Nossa equipe
           </motion.h2>
-          {/* <div className={styles.divider}></div> */}
         </div>
 
         <button aria-label='Slide anterior' ref={prevRef} className={`${styles.navButton} ${styles.navLeft}`}>

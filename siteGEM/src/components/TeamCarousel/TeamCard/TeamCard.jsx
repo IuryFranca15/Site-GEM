@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 import styles from "./TeamCard.module.css";
 
-const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
+const TeamCard = ({ name, role, bio, image }) => {
   return (
 
     <div className={styles.cards}>
@@ -15,17 +15,17 @@ const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
               loading="lazy"
               className={styles.cardImage}
             />
-
           </div>
 
           <div className={styles.cardContent}>
             <div>
               <h2 className={styles.name}>{name}</h2>
+              <h3 className={styles.role}>{role}</h3>
             </div>
             <div>
               <p className={styles.bio}>{bio}</p>
             </div>
-            <div className={styles.social}>
+            {/* <div className={styles.social}>
               {instagram && (
                 <a
                   href={instagram}
@@ -46,7 +46,7 @@ const TeamCard = ({ name, role, bio, image, instagram, linkedln }) => {
                   <FaLinkedin className={styles.icon} />
                 </a>
               )}
-            </div>
+            </div> */}
           </div>
         </article>
       </Link>

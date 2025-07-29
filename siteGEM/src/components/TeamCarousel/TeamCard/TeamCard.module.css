@@ -3,7 +3,7 @@
   border-radius: 1rem;
 }
 .card {
-  background-color: white;
+  background-color: #f5f5ef;
   border-radius: 1rem;
   display: flex;
   margin: 0 auto;
@@ -62,20 +62,6 @@
   font-size: 1rem;
   color: #022939;
   font-weight: 500;
-}
-.social {
-  display: flex;
-  gap: 1.25rem;
-  cursor: pointer;
-  margin-top: auto;
-}
-.icon {
-  color: var(--text-color);
-  font-size: 1.3rem;
-  transition: transform 0.3s ease;
-}
-.icon:hover {
-  transform: translateY(-0.75rem);
 }
 .link {
   text-decoration: none;
