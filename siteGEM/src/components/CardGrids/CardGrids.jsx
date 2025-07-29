@@ -1,32 +1,17 @@
-import React from "react";
+import styles from "./CardsGrid.module.css";
 
 const CardsGrid = ({ data }) => {
-  if (!data.length) return <p>Nenhuma publicação encontrada.</p>;
+  if (!data.length) return <p className={styles.titleNotFound}>Nenhuma publicação encontrada.</p>;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 16,
-        padding: 16,
-      }}
-    >
+    <div className={styles.grid}>
       {data.map(({ id, title, group, type, year, image }) => (
-        <div
-          key={id}
-          style={{
-            border: "1px solid #ddd",
-            borderRadius: 8,
-            padding: 16,
-            backgroundColor: "#fafafa",
-          }}
-        >
+        <div key={id} className={styles.card}>
           {image && (
             <img
               src={image}
               alt={title}
-              style={{ width: "100%", borderRadius: 8, marginBottom: 12 }}
+              className={styles.cardImage}
             />
           )}
           <h4>{title}</h4>

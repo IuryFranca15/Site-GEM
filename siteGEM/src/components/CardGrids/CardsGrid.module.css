@@ -1,0 +1,24 @@
+.titleNotFound{
+  font-size: 1.5rem;
+  color: #fafafa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fafafa;
+}
+
+.cardImage {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
