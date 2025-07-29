@@ -65,8 +65,10 @@ const PostFilters = ({
 
       {/* Filtro Subgrupos */}
       <div className={styles.filtersGroup}>
-        <h3 className={styles.titlesubgroups}>Subgrupos</h3>
-        <div className={styles.divider}></div>
+        <div className={styles.containerTitle}>
+          <h3 className={styles.titlesubgroups}>Subgrupos</h3>
+          <div className={styles.divider}></div>
+        </div>
 
         {allGroups.map((group) => (
           <div key={group} className={styles.checkboxWrapper}>
@@ -86,8 +88,10 @@ const PostFilters = ({
 
       {/* Filtro Natureza da publicação */}
       <div className={styles.filtersGroup}>
-        <h3 className={styles.titlesubgroups}>Natureza da publicação</h3>
-        <div className={styles.divider}></div>
+        <div className={styles.containerTitle}>
+          <h3 className={styles.titlesubgroups}>Natureza da publicação</h3>
+          <div className={styles.divider}></div>
+        </div>
 
         {allTypes.map((type) => (
           <div key={type} className={styles.checkboxWrapper}>
@@ -107,8 +111,10 @@ const PostFilters = ({
 
       {/* Filtro Ano */}
       <div className={styles.filtersGroup}>
-        <h3 className={styles.titlesubgroups}>Ano da publicação</h3>
-        <div className={styles.divider}></div>
+        <div className={styles.containerTitle}>
+          <h3 className={styles.titlesubgroups}>Ano da publicação</h3>
+          <div className={styles.divider}></div>
+        </div>
 
         <div style={{ padding: "0 0.5rem" }}>
           <Range

@@ -40,6 +40,11 @@
   cursor: pointer;
   padding: 5px;
 }
+.containerTitle{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
 .filtersGroup {
   display: flex;
