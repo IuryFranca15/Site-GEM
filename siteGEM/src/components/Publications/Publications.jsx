@@ -43,15 +43,41 @@ export default function Publications() {
   });
 
   // Filtragem
+  const normalizar = (texto) =>
+    texto
+      .toLowerCase()
+      .normalize("NFD") // separa acentos
+      .replace(/[\u0300-\u036f]/g, ""); // remove acentos
+
   const filtrarDados = () => {
+    const termosBusca = normalizar(filtros.search).split(" ").filter(Boolean);
+
     return dados.filter((item) => {
-      const matchGroup = filtros.groups.length === 0 || filtros.groups.includes(item.group);
-      const matchType = filtros.types.length === 0 || filtros.types.includes(item.type);
-      const matchSearch = filtros.search === "" || item.title.toLowerCase().includes(filtros.search.toLowerCase());
-      const matchYear = item.year >= filtros.yearRange[0] && item.year <= filtros.yearRange[1];
+      const matchGroup =
+        filtros.groups.length === 0 || filtros.groups.includes(item.group);
+      const matchType =
+        filtros.types.length === 0 || filtros.types.includes(item.type);
+      const matchYear =
+        item.year >= filtros.yearRange[0] &&
+        item.year <= filtros.yearRange[1];
+
+      const camposParaBuscar = [
+        item.title,
+        item.group,
+        item.type,
+        String(item.year),
+      ].map(normalizar);
+
+      const matchSearch =
+        filtros.search === "" ||
+        termosBusca.some((termo) =>
+          camposParaBuscar.some((campo) => campo.includes(termo))
+        );
+
       return matchGroup && matchType && matchSearch && matchYear;
     });
   };
+
 
   const dadosFiltrados = filtrarDados();
 
