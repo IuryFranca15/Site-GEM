@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilos gerais */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        /* Cabeçalho */
+        .header {
+            background-color: #003366;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        /* Conteúdo Principal */
+        .content {
+            padding: 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #003366;
+            font-size: 20px;
+        }
+        .content .description {
+            font-style: italic;
+            color: #555555;
+            border-left: 3px solid #005a9c;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        .author {
+            font-size: 14px;
+            color: #777777;
+            margin-bottom: 20px;
+        }
+        /* Rodapé */
+        .footer {
+            background-color: #f4f4f4;
+            color: #888888;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #005a9c;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Grupo Economia do Mar (GEM)</h1>
+        </div>
+        <div class="content">
+            <h2>{{TITULO_PUBLICACAO}}</h2>
+            <p class="author">Por: <strong>{{AUTOR_PUBLICACAO}}</strong></p>
+            <p class="description">{{DESCRICAO_PUBLICACAO}}</p>
+            <div>
+                {{CONTEUDO_PUBLICACAO}}
+            </div>
+        </div>
+        <div class="footer">
+            <p>Você está recebendo este e-mail porque se inscreveu na newsletter do GEM.</p>
+            <p>&copy; 2025 Grupo Economia do Mar. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>

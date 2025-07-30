@@ -1,82 +1,132 @@
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends, status, BackgroundTasks, Query  # << 1. IMPORTADO AQUI
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, EmailStr, root_validator
 from typing import List, Optional, Annotated
+from services.email_service import enviar_newsletter_customizada
 import sqlite3
-from datetime import date, timedelta, timezone, datetime 
-import models 
-from passlib.context import CryptContext 
-from jose import JWTError, jwt 
-
-# --- Configurações de Segurança ---
-SECRET_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_AQUI" 
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-# Contexto Passlib para hashing de senha usando Argon2
-# Certifique-se de que 'argon2-cffi' está no seu requirements.txt
-pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+from datetime import timedelta, date
+import uuid
+import models
+from auth import (
+    pwd_context,
+    verify_password,
+    create_access_token,
+    get_current_active_user,
+    get_current_admin_user,
+    ACCESS_TOKEN_EXPIRE_MINUTES
+)
 
 # --- Configuração da Aplicação ---
 app = FastAPI(
-    title="Site GEM API",
-    description="API para gerenciar dados do Grupo Economia do Mar, com autenticação Argon2.",
-    version="0.3.1" # Versão incrementada
+    title="API de Notícias GEM",
+    description="API para gerenciar publicações e usuários com diferentes níveis de acesso.",
+    version="1.3.1"
 )
 
-# --- Modelos Pydantic ---
-class Token(BaseModel):
-    access_token: str
-    token_type: str
 
-class TokenData(BaseModel): 
-    email: Optional[str] = None
+# --- Modelos Pydantic (DTOs) ---
+# ... (todos os seus modelos permanecem iguais)
+# Modelos de Usuário
+class UsuarioBase(BaseModel):
+    nome: str
+    email: EmailStr
+    fotoPerfilUrl: Optional[str] = None
 
-class UserBase(BaseModel):
-    email_integrante: str
-    nome_integrante: str
-    id_subgrupo: Optional[int] = None
 
-class UserCreate(UserBase):
-    password: str 
-    role: str = "membro"
+class UsuarioCreate(UsuarioBase):
+    senha: str
+    role: str = Field("COMUM", pattern="^(ADMIN|COMUM)$")
 
-class UserInDB(UserBase):
-    id_integrante: int
+
+class Usuario(UsuarioBase):
+    id: uuid.UUID
     role: str
+    inscritoNewsletter: bool
 
     class Config:
-        from_attributes = True 
+        from_attributes = True
 
+
+class UsuarioUpdate(BaseModel):
+    nome: Optional[str] = None
+    fotoPerfilUrl: Optional[str] = None
+    senha: Optional[str] = None
+
+
+class UsuarioUpdateAdmin(UsuarioUpdate):
+    role: Optional[str] = Field(None, pattern="^(ADMIN|COMUM)$")
+    inscritoNewsletter: Optional[bool] = None
+
+
+# Modelo da Newsletter
+class NewsletterCustomSchema(BaseModel):
+    assunto: str
+    corpo_html: Optional[str] = Field(None,
+                                      description="Conteúdo completo do e-mail em HTML. Se fornecido, ignora os outros campos de corpo.")
+    corpo_texto: Optional[str] = Field(None,
+                                       description="Corpo do e-mail em texto simples. Pode ser combinado com imagens.")
+    imagens_urls: Optional[List[str]] = Field(None, description="Lista de URLs de imagens a serem incluídas no e-mail.")
+
+    @root_validator(pre=True)
+    def check_content_provided(cls, values):
+        """Valida se pelo menos um tipo de conteúdo foi enviado."""
+        if not values.get('corpo_html') and not values.get('corpo_texto'):
+            raise ValueError('É necessário fornecer ou "corpo_html" ou "corpo_texto".')
+        return values
+
+
+# Modelos de Subgrupo
 class SubgrupoBase(BaseModel):
-    nome_subgrupo: str
+    nome: str
+    descricao: Optional[str] = None
+
 
 class SubgrupoCreate(SubgrupoBase):
     pass
 
+
+class SubgrupoUpdate(SubgrupoBase):
+    pass
+
+
 class Subgrupo(SubgrupoBase):
-    id_subgrupo: int
+    id: uuid.UUID
 
     class Config:
         from_attributes = True
 
+
+# Modelos de Publicação
 class PublicacaoBase(BaseModel):
     titulo: str
-    tipo: str
-    data_publicacao: Optional[date] = None
-    id_subgrupo: Optional[int] = None
+    conteudo: str = Field(..., description="Conteúdo principal da publicação")
+    descricao: str = Field(..., description="Uma breve descrição ou resumo da publicação")
+    autor: str = Field(..., description="Nome do autor (texto livre)")
+    subgrupoId: uuid.UUID
+
 
 class PublicacaoCreate(PublicacaoBase):
     pass
 
+
+class PublicacaoUpdate(PublicacaoBase):
+    pass
+
+
 class Publicacao(PublicacaoBase):
-    id_publicacao: int
+    id: uuid.UUID
+    dataPublicacao: str
 
     class Config:
         from_attributes = True
 
-# --- Funções de Dependência (para gerenciar a conexão com o BD) ---
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+# --- Dependências ---
 def get_db():
     db = models.get_db_connection()
     try:
@@ -84,78 +134,26 @@ def get_db():
     finally:
         db.close()
 
-# --- Funções Utilitárias de Autenticação ---
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
 
-def get_password_hash(password): # Não usado diretamente aqui, mas models.py usa um similar
-    return pwd_context.hash(password)
-
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
-
-def get_user_from_db(email: str, db: sqlite3.Connection) -> Optional[UserInDB]:
-    cursor = db.execute("SELECT id_integrante, nome_integrante, email_integrante, role FROM integrantes WHERE email_integrante = ?", (email,))
-    user_data_row = cursor.fetchone() # user_data_row é um sqlite3.Row
-    if user_data_row:
-        # Converter sqlite3.Row para um dicionário antes de passar para Pydantic
-        user_data_dict = dict(user_data_row)
-        return UserInDB.model_validate(user_data_dict) # Usar model_validate para Pydantic v2
-    return None
-
-def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db: sqlite3.Connection = Depends(get_db)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Não foi possível validar as credenciais",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    email_from_payload: str
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email_from_token: Optional[str] = payload.get("sub")
-        if email_from_token is None:
-            raise credentials_exception
-        email_from_payload = email_from_token
-    except JWTError:
-        raise credentials_exception
-    
-    user = get_user_from_db(email=email_from_payload, db=db) 
-    if user is None:
-        raise credentials_exception
-    return user
-
-def get_current_active_user(current_user: Annotated[UserInDB, Depends(get_current_user)]):
-    return current_user
-
-def get_current_admin_user(current_user: Annotated[UserInDB, Depends(get_current_active_user)]):
-    if current_user.role != "admin":
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Permissão negada. Requer privilégios de administrador.")
-    return current_user
-
-# --- Inicialização ---
+# --- Eventos de Inicialização ---
 @app.on_event("startup")
-async def startup_event(): 
-    print("Iniciando aplicação e verificando tabelas do banco de dados...")
-    models.create_tables() 
-    print("Tabelas verificadas/criadas.")
-    print("Verificando/Criando usuário administrador padrão...")
-    # IMPORTANTE: A função models.create_default_admin() (no seu arquivo models.py)
-    # deve usar o mesmo esquema de hashing de senha (Argon2) que o pwd_context aqui.
-    models.create_default_admin() 
+async def startup_event():
+    print("Iniciando aplicação e configurando o banco de dados...")
+    models.create_tables()
+    models.create_default_admin()
 
-# --- Endpoint de Autenticação (Login) ---
-@app.post("/token", response_model=Token, tags=["Autenticação"])
-def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: sqlite3.Connection = Depends(get_db)):
-    cursor = db.execute("SELECT id_integrante, nome_integrante, email_integrante, role, hashed_password FROM integrantes WHERE email_integrante = ?", (form_data.username,))
-    user_db_row = cursor.fetchone() 
-    if not user_db_row or not verify_password(form_data.password, user_db_row["hashed_password"]):
+
+# --- Endpoints ---
+
+# =================================================================
+# 1. Autenticação (Sem alterações)
+# =================================================================
+@app.post("/login", response_model=Token, tags=["Autenticação"])
+def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+                           db: sqlite3.Connection = Depends(get_db)):
+    cursor = db.execute("SELECT id, email, senha, role FROM usuarios WHERE email = ?", (form_data.username,))
+    user = cursor.fetchone()
+    if not user or not verify_password(form_data.password, user["senha"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Email ou senha incorretos",
@@ -163,161 +161,341 @@ def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depen
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user_db_row["email_integrante"], "role": user_db_row["role"]}, expires_delta=access_token_expires
+        data={"sub": user["email"], "role": user["role"]}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-# --- Endpoint de Teste de Usuário Autenticado ---
-@app.get("/users/me/", response_model=UserInDB, tags=["Usuários"])
-def read_users_me(current_user: Annotated[UserInDB, Depends(get_current_active_user)]):
+
+# =================================================================
+# 2. Perfil de Usuário (Sem alterações)
+# =================================================================
+@app.get("/usuarios/me", response_model=Usuario, tags=["Perfil de Usuário"])
+def read_users_me(current_user: Annotated[Usuario, Depends(get_current_active_user)]):
     return current_user
 
-# --- Endpoints da API (CRUD) ---
-@app.post("/subgrupos/", response_model=Subgrupo, status_code=201, tags=["Subgrupos"])
-def criar_subgrupo(subgrupo: SubgrupoCreate, 
-                     db: sqlite3.Connection = Depends(get_db),
-                     current_admin: UserInDB = Depends(get_current_admin_user)):
-    try:
-        cursor = db.execute("INSERT INTO subgrupo (nome_subgrupo) VALUES (?)", (subgrupo.nome_subgrupo,))
-        db.commit()
-        id_subgrupo_criado = cursor.lastrowid
-        created_subgrupo_row = db.execute("SELECT id_subgrupo, nome_subgrupo FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo_criado,)).fetchone()
-        if created_subgrupo_row:
-            return Subgrupo.model_validate(dict(created_subgrupo_row))
-        raise HTTPException(status_code=500, detail="Erro ao buscar subgrupo após criação.")
-    except sqlite3.IntegrityError:
-        raise HTTPException(status_code=400, detail="Subgrupo com este nome já existe.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao criar subgrupo: {str(e)}")
 
-@app.get("/subgrupos/", response_model=List[Subgrupo], tags=["Subgrupos"])
-def listar_subgrupos(db: sqlite3.Connection = Depends(get_db)): 
-    cursor = db.execute("SELECT id_subgrupo, nome_subgrupo FROM subgrupo")
-    subgrupos_rows = cursor.fetchall()
-    return [Subgrupo.model_validate(dict(s_row)) for s_row in subgrupos_rows]
+@app.put("/usuarios/me", response_model=Usuario, tags=["Perfil de Usuário"])
+def update_own_user(
+        user_update: UsuarioUpdate,
+        current_user: Annotated[Usuario, Depends(get_current_active_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    update_fields = user_update.model_dump(exclude_unset=True)
+    if "senha" in update_fields and update_fields["senha"]:
+        update_fields["senha"] = pwd_context.hash(update_fields["senha"])
+    else:
+        update_fields.pop("senha", None)
 
-@app.get("/subgrupos/{id_subgrupo}", response_model=Subgrupo, tags=["Subgrupos"])
-def obter_subgrupo(id_subgrupo: int, db: sqlite3.Connection = Depends(get_db)): 
-    cursor = db.execute("SELECT id_subgrupo, nome_subgrupo FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo,))
-    subgrupo_row = cursor.fetchone()
-    if subgrupo_row is None:
+    set_clause = ", ".join([f"{field} = ?" for field in update_fields.keys()])
+    values = list(update_fields.values())
+    values.append(str(current_user.id))
+
+    db.execute(f"UPDATE usuarios SET {set_clause} WHERE id = ?", tuple(values))
+    db.commit()
+
+    updated_user_cursor = db.execute("SELECT * FROM usuarios WHERE id = ?", (str(current_user.id),))
+    return Usuario.model_validate(dict(updated_user_cursor.fetchone()))
+
+
+@app.put("/usuarios/me/newsletter", response_model=Usuario, tags=["Perfil de Usuário"])
+def update_newsletter_subscription(
+        inscrever: bool,
+        current_user: Annotated[Usuario, Depends(get_current_active_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    db.execute("UPDATE usuarios SET inscritoNewsletter = ? WHERE id = ?", (inscrever, str(current_user.id)))
+    db.commit()
+
+    updated_user_cursor = db.execute("SELECT * FROM usuarios WHERE id = ?", (str(current_user.id),))
+    return Usuario.model_validate(dict(updated_user_cursor.fetchone()))
+
+
+# =================================================================
+# 3. CRUD de Subgrupos (Sem alterações)
+# =================================================================
+@app.get("/subgrupos", response_model=List[Subgrupo], tags=["Subgrupos"])
+def listar_subgrupos(db: sqlite3.Connection = Depends(get_db)):
+    cursor = db.execute("SELECT id, nome, descricao FROM subgrupos")
+    return [Subgrupo.model_validate(dict(row)) for row in cursor.fetchall()]
+
+
+@app.get("/subgrupos/{subgrupo_id}", response_model=Subgrupo, tags=["Subgrupos"])
+def obter_subgrupo(subgrupo_id: uuid.UUID, db: sqlite3.Connection = Depends(get_db)):
+    cursor = db.execute("SELECT * FROM subgrupos WHERE id = ?", (str(subgrupo_id),))
+    subgrupo = cursor.fetchone()
+    if not subgrupo:
         raise HTTPException(status_code=404, detail="Subgrupo não encontrado.")
-    return Subgrupo.model_validate(dict(subgrupo_row))
+    return Subgrupo.model_validate(dict(subgrupo))
 
-@app.put("/subgrupos/{id_subgrupo}", response_model=Subgrupo, tags=["Subgrupos"])
-def atualizar_subgrupo(id_subgrupo: int, subgrupo_update: SubgrupoCreate,
-                        db: sqlite3.Connection = Depends(get_db),
-                        current_admin: UserInDB = Depends(get_current_admin_user)): 
-    cursor = db.execute("SELECT * FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo,))
-    if cursor.fetchone() is None:
-        raise HTTPException(status_code=404, detail="Subgrupo não encontrado para atualização.")
+
+@app.post("/subgrupos", response_model=Subgrupo, status_code=status.HTTP_201_CREATED, tags=["Subgrupos (Admin)"])
+def criar_subgrupo(
+        subgrupo: SubgrupoCreate,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    subgrupo_id = str(uuid.uuid4())
     try:
-        db.execute("UPDATE subgrupo SET nome_subgrupo = ? WHERE id_subgrupo = ?", (subgrupo_update.nome_subgrupo, id_subgrupo))
+        db.execute("INSERT INTO subgrupos (id, nome, descricao) VALUES (?, ?, ?)",
+                   (subgrupo_id, subgrupo.nome, subgrupo.descricao))
         db.commit()
-        updated_subgrupo_row = db.execute("SELECT id_subgrupo, nome_subgrupo FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo,)).fetchone()
-        if updated_subgrupo_row:
-            return Subgrupo.model_validate(dict(updated_subgrupo_row))
-        raise HTTPException(status_code=500, detail="Erro ao buscar subgrupo após atualização.")
     except sqlite3.IntegrityError:
-        raise HTTPException(status_code=400, detail="Já existe um subgrupo com este nome.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao atualizar subgrupo: {str(e)}")
+        raise HTTPException(status_code=400, detail="Um subgrupo com este nome já existe.")
+    return Subgrupo(id=subgrupo_id, **subgrupo.model_dump())
 
-@app.delete("/subgrupos/{id_subgrupo}", status_code=status.HTTP_204_NO_CONTENT, tags=["Subgrupos"])
-def deletar_subgrupo(id_subgrupo: int,
-                       db: sqlite3.Connection = Depends(get_db),
-                       current_admin: UserInDB = Depends(get_current_admin_user)): 
-    cursor = db.execute("SELECT * FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo,))
-    if cursor.fetchone() is None:
-        raise HTTPException(status_code=404, detail="Subgrupo não encontrado para deleção.")
-    try:
-        db.execute("DELETE FROM subgrupo WHERE id_subgrupo = ?", (id_subgrupo,))
-        db.commit()
-    except sqlite3.IntegrityError as e: 
-         raise HTTPException(status_code=400, detail=f"Erro ao deletar subgrupo: {str(e)}. Verifique se ele não está associado a publicações.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao deletar subgrupo: {str(e)}.")
 
-@app.post("/publicacoes/", response_model=Publicacao, status_code=201, tags=["Publicações"])
-def criar_publicacao(publicacao: PublicacaoCreate, 
-                       db: sqlite3.Connection = Depends(get_db),
-                       current_admin: UserInDB = Depends(get_current_admin_user)): 
-    if publicacao.id_subgrupo:
-        cursor_subgrupo = db.execute("SELECT id_subgrupo FROM subgrupo WHERE id_subgrupo = ?", (publicacao.id_subgrupo,))
-        if cursor_subgrupo.fetchone() is None:
-            raise HTTPException(status_code=404, detail=f"Subgrupo com id {publicacao.id_subgrupo} não encontrado.")
-    try:
-        cursor = db.execute(
-            "INSERT INTO publicacao (titulo, tipo, data_publicacao, id_subgrupo) VALUES (?, ?, ?, ?)",
-            (publicacao.titulo, publicacao.tipo, publicacao.data_publicacao, publicacao.id_subgrupo)
-        )
-        db.commit()
-        id_publicacao_criada = cursor.lastrowid
-        created_publicacao_row = db.execute("SELECT * FROM publicacao WHERE id_publicacao = ?", (id_publicacao_criada,)).fetchone()
-        if created_publicacao_row:
-            return Publicacao.model_validate(dict(created_publicacao_row))
-        raise HTTPException(status_code=500, detail="Erro ao buscar publicação após criação.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno ao criar publicação: {str(e)}")
+@app.put("/subgrupos/{subgrupo_id}", response_model=Subgrupo, tags=["Subgrupos (Admin)"])
+def atualizar_subgrupo(
+        subgrupo_id: uuid.UUID,
+        subgrupo_update: SubgrupoUpdate,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    db.execute("UPDATE subgrupos SET nome = ?, descricao = ? WHERE id = ?",
+               (subgrupo_update.nome, subgrupo_update.descricao, str(subgrupo_id)))
+    db.commit()
+    return obter_subgrupo(subgrupo_id, db)
 
-@app.get("/publicacoes/", response_model=List[Publicacao], tags=["Publicações"])
-def listar_publicacoes(skip: int = 0, limit: int = 100, db: sqlite3.Connection = Depends(get_db)): 
-    cursor = db.execute("SELECT * FROM publicacao LIMIT ? OFFSET ?", (limit, skip))
-    publicacoes_rows = cursor.fetchall()
-    return [Publicacao.model_validate(dict(p_row)) for p_row in publicacoes_rows]
 
-@app.get("/publicacoes/{id_publicacao}", response_model=Publicacao, tags=["Publicações"])
-def obter_publicacao(id_publicacao: int, db: sqlite3.Connection = Depends(get_db)): 
-    cursor = db.execute("SELECT * FROM publicacao WHERE id_publicacao = ?", (id_publicacao,))
-    publicacao_row = cursor.fetchone()
-    if publicacao_row is None:
+@app.delete("/subgrupos/{subgrupo_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Subgrupos (Admin)"])
+def deletar_subgrupo(
+        subgrupo_id: uuid.UUID,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    db.execute("DELETE FROM subgrupos WHERE id = ?", (str(subgrupo_id),))
+    db.commit()
+    return
+
+
+# =================================================================
+# 4. CRUD de Publicações (Endpoint de listagem CORRIGIDO)
+# =================================================================
+
+@app.get("/publicacoes", response_model=List[Publicacao], tags=["Publicações"])
+def listar_publicacoes(
+        subgrupo_id: Optional[uuid.UUID] = Query(None, description="Filtra por um subgrupo específico."),
+        ano: Optional[int] = Query(None, description="Filtra por ano de publicação."),
+        mes: Optional[int] = Query(None, description="Filtra por mês de publicação (requer 'ano')."),
+        data_inicio: Optional[date] = Query(None, description="Filtra por data de início (formato: AAAA-MM-DD)."),
+        data_fim: Optional[date] = Query(None, description="Filtra por data de fim (formato: AAAA-MM-DD)."),
+        db: sqlite3.Connection = Depends(get_db)
+):
+    if mes and not ano:
+        raise HTTPException(status_code=400, detail="O filtro por 'mes' requer que o 'ano' também seja fornecido.")
+
+    query = "SELECT * FROM publicacoes WHERE 1=1"
+    params = []
+
+    if subgrupo_id:
+        query += " AND subgrupoId = ?"
+        params.append(str(subgrupo_id))
+    if ano:
+        query += " AND strftime('%Y', dataPublicacao) = ?"
+        params.append(str(ano))
+    if mes:
+        mes_formatado = f"{mes:02d}"
+        query += " AND strftime('%m', dataPublicacao) = ?"
+        params.append(mes_formatado)
+    if data_inicio and data_fim:
+        query += " AND DATE(dataPublicacao) BETWEEN ? AND ?"
+        params.extend([data_inicio.strftime('%Y-%m-%d'), data_fim.strftime('%Y-%m-%d')])
+    elif data_inicio:
+        query += " AND DATE(dataPublicacao) >= ?"
+        params.append(data_inicio.strftime('%Y-%m-%d'))
+    elif data_fim:
+        query += " AND DATE(dataPublicacao) <= ?"
+        params.append(data_fim.strftime('%Y-%m-%d'))
+
+    query += " ORDER BY dataPublicacao DESC"
+
+    cursor = db.execute(query, tuple(params))
+    publicacoes = cursor.fetchall()
+    return [Publicacao.model_validate(dict(p)) for p in publicacoes]
+
+
+@app.get("/publicacoes/{publicacao_id}", response_model=Publicacao, tags=["Publicações"])
+def obter_publicacao(publicacao_id: uuid.UUID, db: sqlite3.Connection = Depends(get_db)):
+    cursor = db.execute("SELECT * FROM publicacoes WHERE id = ?", (str(publicacao_id),))
+    publicacao = cursor.fetchone()
+    if not publicacao:
         raise HTTPException(status_code=404, detail="Publicação não encontrada.")
-    return Publicacao.model_validate(dict(publicacao_row))
+    return Publicacao.model_validate(dict(publicacao))
 
-@app.put("/publicacoes/{id_publicacao}", response_model=Publicacao, tags=["Publicações"])
-def atualizar_publicacao(id_publicacao: int, publicacao_update: PublicacaoCreate,
-                          db: sqlite3.Connection = Depends(get_db),
-                          current_admin: UserInDB = Depends(get_current_admin_user)): 
-    cursor = db.execute("SELECT * FROM publicacao WHERE id_publicacao = ?", (id_publicacao,))
-    if cursor.fetchone() is None:
-        raise HTTPException(status_code=404, detail="Publicação não encontrada para atualização.")
-    if publicacao_update.id_subgrupo:
-        cursor_subgrupo = db.execute("SELECT id_subgrupo FROM subgrupo WHERE id_subgrupo = ?", (publicacao_update.id_subgrupo,))
-        if cursor_subgrupo.fetchone() is None:
-            raise HTTPException(status_code=404, detail=f"Subgrupo com id {publicacao_update.id_subgrupo} não encontrado para associação.")
-    try:
-        db.execute(
-            """UPDATE publicacao SET titulo = ?, tipo = ?, data_publicacao = ?, id_subgrupo = ?
-               WHERE id_publicacao = ?""",
-            (publicacao_update.titulo, publicacao_update.tipo, publicacao_update.data_publicacao, publicacao_update.id_subgrupo, id_publicacao)
+
+@app.post("/publicacoes", response_model=Publicacao, status_code=status.HTTP_201_CREATED, tags=["Publicações (Admin)"])
+def criar_publicacao(
+        publicacao: PublicacaoCreate,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    cursor = db.execute("SELECT id FROM subgrupos WHERE id = ?", (str(publicacao.subgrupoId),))
+    if not cursor.fetchone():
+        raise HTTPException(status_code=404, detail="Subgrupo não encontrado.")
+
+    pub_id = str(uuid.uuid4())
+    db.execute(
+        "INSERT INTO publicacoes (id, titulo, conteudo, descricao, autor, subgrupoId) VALUES (?, ?, ?, ?, ?, ?)",
+        (
+            pub_id,
+            publicacao.titulo,
+            publicacao.conteudo,
+            publicacao.descricao,
+            publicacao.autor,
+            str(publicacao.subgrupoId)
         )
-        db.commit()
-        updated_publicacao_row = db.execute("SELECT * FROM publicacao WHERE id_publicacao = ?", (id_publicacao,)).fetchone()
-        if updated_publicacao_row:
-            return Publicacao.model_validate(dict(updated_publicacao_row))
-        raise HTTPException(status_code=500, detail="Erro ao buscar publicação após atualização.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno ao atualizar publicação: {str(e)}")
+    )
+    db.commit()
 
-@app.delete("/publicacoes/{id_publicacao}", status_code=status.HTTP_204_NO_CONTENT, tags=["Publicações"])
-def deletar_publicacao(id_publicacao: int,
-                         db: sqlite3.Connection = Depends(get_db),
-                         current_admin: UserInDB = Depends(get_current_admin_user)): 
-    cursor = db.execute("SELECT * FROM publicacao WHERE id_publicacao = ?", (id_publicacao,))
-    if cursor.fetchone() is None:
-        raise HTTPException(status_code=404, detail="Publicação não encontrada para deleção.")
+    return obter_publicacao(pub_id, db)
+
+
+@app.put("/publicacoes/{publicacao_id}", response_model=Publicacao, tags=["Publicações (Admin)"])
+def atualizar_publicacao(
+        publicacao_id: uuid.UUID,
+        publicacao_update: PublicacaoUpdate,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    db.execute(
+        "UPDATE publicacoes SET titulo = ?, conteudo = ?, descricao = ?, autor = ?, subgrupoId = ? WHERE id = ?",
+        (
+            publicacao_update.titulo,
+            publicacao_update.conteudo,
+            publicacao_update.descricao,
+            publicacao_update.autor,
+            str(publicacao_update.subgrupoId),
+            str(publicacao_id)
+        )
+    )
+    db.commit()
+    return obter_publicacao(publicacao_id, db)
+
+
+@app.delete("/publicacoes/{publicacao_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Publicações (Admin)"])
+def deletar_publicacao(
+        publicacao_id: uuid.UUID,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    db.execute("DELETE FROM publicacoes WHERE id = ?", (str(publicacao_id),))
+    db.commit()
+    return
+
+
+# =================================================================
+# 5. CRUD de Usuários (Sem alterações)
+# =================================================================
+@app.get("/usuarios", response_model=List[Usuario], tags=["Usuários (Admin)"])
+def listar_usuarios(
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    cursor = db.execute("SELECT * FROM usuarios")
+    return [Usuario.model_validate(dict(row)) for row in cursor.fetchall()]
+
+
+@app.post("/usuarios", response_model=Usuario, status_code=status.HTTP_201_CREATED, tags=["Usuários (Admin)"])
+def criar_usuario(
+        usuario: UsuarioCreate,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    user_id = str(uuid.uuid4())
+    hashed_password = pwd_context.hash(usuario.senha)
     try:
-        db.execute("DELETE FROM publicacao WHERE id_publicacao = ?", (id_publicacao,))
+        db.execute("INSERT INTO usuarios (id, nome, email, senha, fotoPerfilUrl, role) VALUES (?, ?, ?, ?, ?, ?)",
+                   (user_id, usuario.nome, usuario.email, hashed_password, usuario.fotoPerfilUrl, usuario.role))
         db.commit()
-    except sqlite3.IntegrityError as e: 
-        raise HTTPException(status_code=400, detail=f"Erro ao deletar publicação: {str(e)}. Verifique se não está associada a downloads.")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno ao deletar publicação: {str(e)}")
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=400, detail="O email fornecido já está em uso.")
 
+    new_user_cursor = db.execute("SELECT * FROM usuarios WHERE id = ?", (user_id,))
+    return Usuario.model_validate(dict(new_user_cursor.fetchone()))
+
+
+@app.get("/usuarios/{usuario_id}", response_model=Usuario, tags=["Usuários (Admin)"])
+def obter_usuario(
+        usuario_id: uuid.UUID,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    cursor = db.execute("SELECT * FROM usuarios WHERE id = ?", (str(usuario_id),))
+    user = cursor.fetchone()
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado.")
+    return Usuario.model_validate(dict(user))
+
+
+@app.put("/usuarios/{usuario_id}", response_model=Usuario, tags=["Usuários (Admin)"])
+def atualizar_usuario(
+        usuario_id: uuid.UUID,
+        user_update: UsuarioUpdateAdmin,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    update_fields = user_update.model_dump(exclude_unset=True)
+    if "senha" in update_fields and update_fields["senha"]:
+        update_fields["senha"] = pwd_context.hash(update_fields["senha"])
+    else:
+        update_fields.pop("senha", None)
+
+    if not update_fields:
+        raise HTTPException(status_code=400, detail="Nenhum campo para atualizar foi fornecido.")
+
+    set_clause = ", ".join([f"{field} = ?" for field in update_fields.keys()])
+    values = list(update_fields.values())
+    values.append(str(usuario_id))
+
+    db.execute(f"UPDATE usuarios SET {set_clause} WHERE id = ?", tuple(values))
+    db.commit()
+    return obter_usuario(usuario_id, current_admin, db)
+
+
+@app.delete("/usuarios/{usuario_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["Usuários (Admin)"])
+def deletar_usuario(
+        usuario_id: uuid.UUID,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    if str(usuario_id) == str(current_admin.id):
+        raise HTTPException(status_code=400, detail="Um administrador não pode deletar a própria conta.")
+    db.execute("DELETE FROM usuarios WHERE id = ?", (str(usuario_id),))
+    db.commit()
+    return
+
+
+# =================================================================
+# 6. Newsletter (Sem alterações)
+# =================================================================
+@app.post("/newsletter/enviar", status_code=status.HTTP_202_ACCEPTED, tags=["Newsletter (Admin)"])
+def enviar_newsletter_customizada_endpoint(
+        newsletter: NewsletterCustomSchema,
+        background_tasks: BackgroundTasks,
+        current_admin: Annotated[Usuario, Depends(get_current_admin_user)],
+        db: sqlite3.Connection = Depends(get_db)
+):
+    cursor_users = db.execute("SELECT email FROM usuarios WHERE inscritoNewsletter = 1")
+    assinantes = [row['email'] for row in cursor_users.fetchall()]
+    if not assinantes:
+        raise HTTPException(status_code=404, detail="Nenhum assinante encontrado.")
+
+    for email in assinantes:
+        background_tasks.add_task(
+            enviar_newsletter_customizada,
+            destinatario=email,
+            assunto=newsletter.assunto,
+            corpo_html=newsletter.corpo_html,
+            corpo_texto=newsletter.corpo_texto,
+            imagens_urls=newsletter.imagens_urls
+        )
+
+    return {"message": f"Envio da newsletter '{newsletter.assunto}' iniciado para {len(assinantes)} assinante(s)."}
+
+
+# =================================================================
+# 7. Root (Sem alterações)
+# =================================================================
 @app.get("/", tags=["Root"])
-async def root(): 
-    return {
-        "message": "Bem-vindo à API do Site GEM!",
-        "docs_url": "/docs",
-        "redoc_url": "/redoc"
-    }
+async def root():
+    return {"message": "Bem-vindo à API de Notícias GEM!"}
