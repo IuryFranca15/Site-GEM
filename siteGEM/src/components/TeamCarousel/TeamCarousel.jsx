@@ -8,57 +8,52 @@ import 'swiper/css/navigation';
 import { motion } from "framer-motion";
 
 
+
 const teamMembers = [
   {
     name: 'Nathália Macedo',
     role: 'Clima e Meio Ambiente',
-    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
-    image: 'src/assets/image/ex-2.webp',
-    instagram: '#',
-    linkedln: '#'
+    image: 'src/assets/image/Natalia_Macedo.png',
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    icon: 'src/assets/image/pesca-icone.png'
   },
 
   {
     name: 'Giselle Gomes',
-    role: 'Clima e Meio Ambiente',
-    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
-    image: 'src/assets/image/ex-3.webp',
-    instagram: '#',
-    linkedln: '#'
+    role: 'Transportes e Infraestrutura',
+    image: 'src/assets/image/Giselle_Gomes.png',
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    icon: 'src/assets/image/pesca-icone.png'
   },
 
   {
     name: 'Gabriel Magalhães',
     role: 'Energias Offshore',
-    bio: 'Especialista em energias renováveis e offshore, com foco em geração eólica no mar e transição energética sustentável.',
-    image: 'src/assets/image/ex-1.webp',
-    instagram: '#',
-    linkedln: '#'
+    image: 'src/assets/image/Natalia_Macedo.png',
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    icon: 'src/assets/image/pesca-icone.png'
   },
 
   {
     name: 'Maria Ribeiro',
-    role: 'Clima e Meio Ambiente',
-    bio: 'Especialista em mudanças climáticas e gestão ambiental, com foco em impactos costeiros e adaptação de comunidades marinhas.',
-    image: 'src/assets/image/ex-equipe.avif',
-    instagram: '#',
-    linkedln: '#'
+    role: 'Turismo, esporte e lazer',
+    image: 'src/assets/image/Giselle_Gomes.png',
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    icon: 'src/assets/image/pesca-icone.png'
   },
   {
     name: 'Fernanda Lins',
     role: 'Conceitos e Métodos',
-    bio: 'Especialista em conceitos e métodos aplicados à economia do mar, com foco em análise de dados, indicadores e modelagem socioeconômica.',
-    image: 'src/assets/image/ex-2.webp',
-    instagram: '#',
-    linkedln: '#'
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    image: 'src/assets/image/Natalia_Macedo.png',
+    icon: 'src/assets/image/pesca-icone.png'
   },
   {
     name: 'Thiago Thierry',
     role: 'Defesa e Segurança',
-    bio: 'Especialista em defesa marítima e segurança costeira, com foco em proteção de recursos marinhos e vigilância estratégica.',
-    image: 'src/assets/image/ex-4.webp',
-    instagram: '#',
-    linkedln: '#'
+    bg: 'src/assets/image/ex-bg-grupo.webp',
+    image: 'src/assets/image/Giselle_Gomes.png',
+    icon: 'src/assets/image/pesca-icone.png'
   },
 ]
 
@@ -119,7 +114,7 @@ const TeamCarousel = () => {
             highlightPartialSlide(swiper);
           }}
           slidesPerGroup={2}
-          spaceBetween={20}
+          spaceBetween={10}
           modules={[Navigation, Autoplay]}
           autoplay={{
             delay: 2000,
