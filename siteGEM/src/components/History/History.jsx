@@ -1,10 +1,11 @@
 import React from 'react'
 import Styles from './History.module.css'
-import logo from '../../assets/logoGemColored.png'
+import logo from '../../assets/logoGemHistory.png'
 
 const History = () => {
   return (
     <div className={Styles.container}>
+      <div className={Styles.card}>
       <div className={Styles.overlay}>
         <div className={Styles.textWrapper}>
           <h1 className={Styles.heading}>Nossa história</h1>
@@ -29,6 +30,7 @@ const History = () => {
         </div>
 
         <img src={logo} alt="Logo GEM" className={Styles.logoImg} />
+      </div>
       </div>
     </div>
   )
