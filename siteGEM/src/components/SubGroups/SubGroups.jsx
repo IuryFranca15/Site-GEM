@@ -110,25 +110,6 @@ const subgrupos = [
 ]
 
 const SubGrupos = () => {
-  // const [subgrupos, setSubgrupos] = useState([]);
-
-  // useEffect(() => {
-  //
-  //   fetch('https://sua-api.com/subgrupos')
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Erro ao buscar dados');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       setSubgrupos(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Erro ao buscar subgrupos:', error);
-  //     });
-  // }, []);
-
   return (
     <div className={Styles.container}>
       <div className={Styles.content}>
@@ -152,7 +133,6 @@ const SubGrupos = () => {
                       Saiba mais
                       <IoArrowForwardSharp className={Styles.arrowIcon} />
                     </a>
-
                   </div>
                 </div>
               </Link>
