@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 import styles from "./TeamCard.module.css";
 
-const TeamCard = ({ name, role, bio, image }) => {
+
+const TeamCard = ({ name, role, image, bg, icon }) => {
   return (
 
     <div className={styles.cards}>
       <Link className={styles.link}>
-        <article className={styles.card}>
+        {/* <article className={styles.card}>
           <div className={styles.cardImageContainer}>
             <img
               src={image}
@@ -25,30 +25,34 @@ const TeamCard = ({ name, role, bio, image }) => {
             <div>
               <p className={styles.bio}>{bio}</p>
             </div>
-            {/* <div className={styles.social}>
-              {instagram && (
-                <a
-                  href={instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Instagram de ${name}`}
-                >
-                  <FaInstagram className={styles.icon} />
-                </a>
-              )}
-              {linkedln && (
-                <a
-                  href={linkedln}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`LinkedIn de ${name}`}
-                >
-                  <FaLinkedin className={styles.icon} />
-                </a>
-              )}
-            </div> */}
           </div>
-        </article>
+        </article> */}
+
+        <div className={`${styles.card} card`}>
+          <div className={styles.imageWrapper}>
+            <img
+              src={bg}
+              alt="Imagem que representa o subgrupo"
+              className={styles.bgImage}
+            />
+            <div className={styles.overlay}></div>
+          </div>
+
+          <div className={styles.contentInformation}>
+            <img
+              src={image}
+              alt="Imagem da pessoa"
+              className={styles.memberImage}
+            />
+            <h3>{name}</h3>
+            <p>{role}</p>
+            <img
+              src={icon}
+              alt=""
+              className={styles.icon}
+            />
+          </div>
+        </div>
       </Link>
     </div>
   );

@@ -11,7 +11,7 @@
 }
 
 .content{
-  max-width: 80rem;
+  max-width: 87.5rem;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -42,11 +42,11 @@
 }
 
 .navLeft {
-  left: -2.9rem;
+  left: -1rem;
 }
 
 .navRight {
-  right: -2.9rem;
+  right: -1rem;
 }
 
 .card{

@@ -1,4 +1,4 @@
-.cards{
+/* .cards{
   overflow: hidden;
   border-radius: 1rem;
 }
@@ -72,4 +72,86 @@
   .card {
     max-width: 300px;
   }
+} */
+
+.card{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f5f5ef;
+  max-width: 17.125rem;
+ 
+}
+ .imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0daa9b;
+  opacity: 0.5; 
+  pointer-events: none; 
+}
+.contentInformation{
+  background-color: #f5f5ef;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -14px;
+  position: relative;
+  z-index: 10;
+}
+.memberImage{
+  width: 100px;
+  margin-top: -70px;
+  border-radius: 50%;
+  z-index: 40;
+}
+.contentInformation h3{
+  color: var(--text-color);
+  font-size: 1.1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.contentInformation span{
+  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+.contentInformation p{
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.icon{
+  width: 50px;
+  transition: transform 0.3s ease;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
