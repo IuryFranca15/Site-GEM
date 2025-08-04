@@ -114,7 +114,7 @@ const TeamCarousel = () => {
             highlightPartialSlide(swiper);
           }}
           slidesPerGroup={2}
-          spaceBetween={10}
+          spaceBetween={20}
           modules={[Navigation, Autoplay]}
           autoplay={{
             delay: 2000,
