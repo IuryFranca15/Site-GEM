@@ -21,7 +21,7 @@ const PostFilters = ({
     "Transporte e infraestrutura",
     "Turismo, esporte e lazer",
   ],
-  allTypes = ["Livro", "Policy Brief", "Relatório", "Artigo", "Notícia"],
+  allTypes = ["Livro", "Policy Brief", "Relatórios", "Artigo", "Notícia"],
 }) => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
