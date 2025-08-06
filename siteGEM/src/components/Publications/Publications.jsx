@@ -10,11 +10,11 @@ import post3 from "../../assets/image/post3.avif";
 import style from './Publication.module.css'
 
 const dados = [
-  { id: 1, image: post1, title: "Publicação A", group: "Clima e meio ambiente", type: "Livro", year: 2010 },
-  { id: 2, image: post2, title: "Publicação B", group: "Energias offshore", type: "Policy Brief", year: 2018 },
-  { id: 3, image: post3, title: "Publicação C", group: "Pesca e aquicultura", type: "Relatório", year: 2015 },
-  { id: 4, image: post2, title: "Publicação D", group: "Clima e meio ambiente", type: "Notícia", year: 2012 },
-  { id: 5, image: post1, title: "Publicação E", group: "Blue Finance", type: "Artigo", year: 2020 },
+  { id: 1, image: post1, title: "Publicação A", author: "Gabriel Rallile", group: "Clima e meio ambiente", type: "Livro", year: 2010 },
+  { id: 2, image: post2, title: "Publicação B", author: "Ângela Mascarenhas", group: "Energias offshore", type: "Policy Brief", year: 2018 },
+  { id: 3, image: post3, title: "Publicação C", author: "Beatriz Saraiva", group: "Pesca e aquicultura", type: "Relatório", year: 2015 },
+  { id: 4, image: post2, title: "Publicação D", author: "Rinalde de Paulo", group: "Clima e meio ambiente", type: "Notícia", year: 2012 },
+  { id: 5, image: post1, title: "Publicação E", author: "Natália Fachinelli", group: "Blue Finance", type: "Artigo", year: 2020 },
 ];
 
 const allGroups = [
@@ -32,7 +32,7 @@ const allGroups = [
   "Turismo, esporte e lazer",
 ];
 
-const allTypes = ["Livro", "Policy Brief", "Relatório", "Artigo", "Notícia"];
+const allTypes = ["Livro", "Policy Brief", "Relatórios", "Artigo", "Notícia"];
 
 export default function Publications() {
   const [filtros, setFiltros] = useState({
