@@ -31,7 +31,12 @@ const PolicyBriefs = ({ images = [] }) => {
         Confira os últimos policy briefs
       </motion.h2>
       <div className={styles.carouselWrapper}>
-        <button className={styles.arrowLeft} onClick={prevSlide}>&lt;</button>
+        <button aria-label='Slide anterior' className={`${styles.navButton} ${styles.arrowLeft}`} onClick={prevSlide} >
+          <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
         <div className={styles.carousel}>
           {defaultImages.map((item, index) => {
             const position = index - selectedIndex;
@@ -61,7 +66,11 @@ const PolicyBriefs = ({ images = [] }) => {
             );
           })}
         </div>
-        <button className={styles.arrowRight} onClick={nextSlide}>&gt;</button>
+        <button aria-label='Próximo Slide' className={`${styles.navButton} ${styles.arrowRight}`} onClick={nextSlide}>
+          <svg xmlns="http://www.w3.org/2000/svg" className={styles.navIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
   );

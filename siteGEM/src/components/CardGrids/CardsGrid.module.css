@@ -1,6 +1,10 @@
-.titleNotFound{
+.titleNotFound {
   font-size: 1.5rem;
   color: #fafafa;
+}
+
+.container{
+  width: 100%;
 }
 
 .grid {
@@ -9,16 +13,50 @@
   gap: 16px;
   padding: 16px;
 }
-
 .card {
-  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
-  background-color: #fafafa;
+  overflow: hidden;
+  position: relative;
+
+}
+.imageContainer {
+  position: relative;
 }
 
 .cardImage {
   width: 100%;
+  display: block;
   border-radius: 8px;
-  margin-bottom: 12px;
+  opacity: 0.6; 
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover .cardImage {
+  opacity: 0.9; 
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  border-radius: 8px;
+}
+
+.overlay h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.overlay h3 {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  font-weight: 400;
 }
