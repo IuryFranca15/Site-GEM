@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
+import { Link } from "react-router-dom";
 
 const Carousel = ({ title, data }) => {
   const prevRef = useRef(null);
@@ -98,22 +99,26 @@ const Carousel = ({ title, data }) => {
           >
             {data.map((item, index) => (
               <SwiperSlide key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className={styles.card}
-                  style={{ backgroundImage: `url(${item.image})` }}
-                  role="img"
-                  aria-label={item.title}
-                >
-                  <div className={styles.overlay}></div>
-                  <div className={styles.content}>
-                    <h3 className={styles.cardTitle}>{item.title}</h3>
-                    {item.text && <p className={styles.cardText}>{item.text}</p>}
-                  </div>
-                </motion.div>
+                <Link to="/publicacao/${id}">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className={styles.card}
+                    style={{ backgroundImage: `url(${item.image})` }}
+                    role="img"
+                    aria-label={item.title}
+                  >
+                    <div className={styles.overlay}></div>
+                    <div className={styles.content}>
+                      <h3 className={styles.cardTitle}>{item.title}</h3>
+                      {item.text && <p className={styles.cardText}>{item.text}</p>}
+                    </div>
+                  </motion.div>
+
+                </Link>
+
               </SwiperSlide>
             ))}
           </Swiper>
