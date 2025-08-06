@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   padding: 10rem 1rem 5rem 1rem;
-  background-color: var(--bg-color);
+  background: radial-gradient(circle, #0a2647 0%, #0e2f53 60%, #055372 100%);
 }
 
 .content{
