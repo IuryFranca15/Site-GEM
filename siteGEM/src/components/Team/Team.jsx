@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
@@ -135,27 +136,31 @@ const Team = () => {
             >
               {membrosDoGrupo.map((membro) => (
                 <SwiperSlide key={membro.id}>
-                  <div className={`${styles.grid} card`}>
-                    <div className={styles.imageWrapper}>
-                      <img src={membro.bg} alt="Imagem de fundo" className={styles.bgImage} />
-                      <div className={styles.overlay}></div>
-                    </div>
-                    <div className={styles.contentInformation}>
-                      <img src={membro.foto} alt={`Foto de ${membro.nome}`} className={styles.memberImage} />
-                      <h3>{membro.nome}</h3>
-                      <p>{membro.descricao}</p>
-                      <div className={styles.iconWrapper}>
-                        <img src={membro.iconeGrupo} alt="Ícone do grupo" className={styles.icon} />
+                  <Link to={`/membros/${membro.id}`} className={styles.link}>
+                    <div className={`${styles.grid} card`}>
+                      <div className={styles.imageWrapper}>
+                        <img src={membro.bg} alt="Imagem de fundo" className={styles.bgImage} />
+                        <div className={styles.overlay}></div>
+                      </div>
+                      <div className={styles.contentInformation}>
+                        <img src={membro.foto} alt={`Foto de ${membro.nome}`} className={styles.memberImage} />
+                        <h3>{membro.nome}</h3>
+                        <p>{membro.descricao}</p>
+                        <div className={styles.iconWrapper}>
+                          <img src={membro.iconeGrupo} alt="Ícone do grupo" className={styles.icon} />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
+
                 </SwiperSlide>
+
               ))}
             </Swiper>
           </motion.section>
         );
       })}
-    </div>
+    </div >
   );
 };
 
