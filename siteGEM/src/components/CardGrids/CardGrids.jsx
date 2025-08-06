@@ -27,12 +27,9 @@ const CardsGrid = ({ data }) => {
               </div>
             </div>
           </Link>
-
         ))}
       </div>
     </div>
-
-
   )
 };
 
