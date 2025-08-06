@@ -28,7 +28,6 @@
   z-index: 2;
 }
 
-
 .carouselWrapper {
   display: flex;
   align-items: center;
@@ -36,7 +35,6 @@
   position: relative;
   overflow: visible;
 }
-
 .carousel {
   display: flex;
   align-items: center;
@@ -47,6 +45,27 @@
   width: 100%;
   max-width: 900px;
 }
+
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
+
+.navButton {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
 
 .arrowLeft,
 .arrowRight {
