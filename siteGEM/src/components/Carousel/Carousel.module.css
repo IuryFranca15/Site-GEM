@@ -23,7 +23,6 @@
   margin-bottom: 0.875rem;
 }
 
-
 .carouselWrapper {
   position: relative;
   padding-bottom: 2rem;
@@ -81,7 +80,7 @@
   width: 24px;
   height: 24px;
   color: #333;
-} 
+}
 
 .overlay {
   position: absolute;
@@ -133,4 +132,14 @@
 .lastVisible {
   opacity: 0.4;
   transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .navLeft {
+    left: -6px;
+  }
+
+  .navRight {
+    right: -6px;
+  }
 }

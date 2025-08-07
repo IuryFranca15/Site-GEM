@@ -2,20 +2,20 @@
   width: 100%;
   padding: 10rem 1rem 5rem 1rem;
 }
-.content{
+.content {
   max-width: 100rem;
   margin: 0 auto;
   display: flex;
   gap: 100px;
 }
-.filters{
+.filters {
   display: flex;
   flex-direction: column;
-  gap: 1.875rem;
+  gap: 2rem;
 }
 
-.containerSearch{
-  max-width: 250px;
+.containerSearch {
+  max-width: 270px;
   position: relative;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@
 
 .searchInput {
   width: 100%;
-  padding: 8px 40px 8px 20px;
+  padding: 10px 40px 10px 20px;
   border-radius: 10px;
   border: 1px solid #c3c3c3;
   color: #000;
@@ -40,7 +40,7 @@
   cursor: pointer;
   padding: 5px;
 }
-.containerTitle{
+.containerTitle {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -52,7 +52,7 @@
   gap: 1rem;
 }
 
-.titlesubgroups{
+.titlesubgroups {
   font-size: 1.25rem;
   color: #fff;
   font-weight: 600;
@@ -85,12 +85,12 @@
 }
 
 .checkbox:checked {
-  background-color: #0d9488; 
+  background-color: #0d9488;
   border-color: #0d9488;
 }
 
 .checkbox:checked::after {
-  content: '✔';
+  content: "✔";
   color: white;
   font-size: 16px;
   position: absolute;
@@ -102,4 +102,53 @@
   font-size: 16px;
   color: #fff;
   cursor: pointer;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+.trackWrapper {
+  height: 36px;
+  display: flex;
+}
+
+.track {
+  height: 6px;
+  width: 250px;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #00a896;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rangeValue {
+  color: #fff;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .track {
+    width: 300px;
+  }
+  .containerSearch {
+    max-width: 100%;
+  }
+
+  .divider {
+    margin-bottom: 0;
+  }
 }
