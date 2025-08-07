@@ -25,7 +25,7 @@ function App() {
         <Route path='/subgrupos' element={<SubGroups />} />
         <Route path="/grupo/:id" element={<GroupPage />} />
         <Route path='/publicacoes' element={<Publications />} />
-        <Route path='/historia' element={<History/>}/>
+        <Route path='/historia' element={<History />} />
       </Routes>
       <Footer />
     </BrowserRouter>
