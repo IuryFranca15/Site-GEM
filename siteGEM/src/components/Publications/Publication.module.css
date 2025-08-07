@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   padding: 10rem 1rem 5rem 1rem;
+  background: radial-gradient(circle, #0a2647 0%, #0e2f53 80%, #055372 100%);
 }
 .content{
   max-width: 100rem;
