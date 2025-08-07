@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Range, getTrackBackground } from "react-range";
 import styles from "./PostFilters.module.css";
+import DropdownCheckbox from "../SubgrupoFilter/DropdownCheckbox ";
+import DropdownCheckboxNature from "../NatureOfPublicationFilter/DropdownCheckboxNature ";
 
 const MIN = 1990;
 const MAX = new Date().getFullYear();
@@ -64,7 +66,7 @@ const PostFilters = ({
       </div>
 
       {/* Filtro Subgrupos */}
-      <div className={styles.filtersGroup}>
+      {/* <div className={styles.filtersGroup}>
         <div className={styles.containerTitle}>
           <h3 className={styles.titlesubgroups}>Subgrupos</h3>
           <div className={styles.divider}></div>
@@ -84,30 +86,19 @@ const PostFilters = ({
             </label>
           </div>
         ))}
-      </div>
+      </div> */}
+      <DropdownCheckbox
+        allGroups={allGroups}
+        selectedGroups={selectedGroups}
+        toggleGroup={toggleGroup}
+      />
 
       {/* Filtro Natureza da publicação */}
-      <div className={styles.filtersGroup}>
-        <div className={styles.containerTitle}>
-          <h3 className={styles.titlesubgroups}>Natureza da publicação</h3>
-          <div className={styles.divider}></div>
-        </div>
-
-        {allTypes.map((type) => (
-          <div key={type} className={styles.checkboxWrapper}>
-            <input
-              id={`type-${type}`}
-              type="checkbox"
-              className={styles.checkbox}
-              checked={selectedTypes.includes(type)}
-              onChange={() => toggleType(type)}
-            />
-            <label htmlFor={`type-${type}`} className={styles.label}>
-              {type}
-            </label>
-          </div>
-        ))}
-      </div>
+      <DropdownCheckboxNature
+        allTypes={allTypes}
+        selectedTypes={selectedTypes}
+        toggleType={toggleType}
+      />
 
       {/* Filtro Ano */}
       <div className={styles.filtersGroup}>
@@ -116,7 +107,7 @@ const PostFilters = ({
           <div className={styles.divider}></div>
         </div>
 
-        <div style={{ padding: "0 0.5rem" }}>
+        <div className={styles.wrapper}>
           <Range
             step={1}
             min={MIN}
@@ -127,26 +118,18 @@ const PostFilters = ({
               <div
                 onMouseDown={props.onMouseDown}
                 onTouchStart={props.onTouchStart}
-                style={{
-                  ...props.style,
-                  height: 36,
-                  display: "flex",
-                  width: "100%",
-                }}
+                className={styles.trackWrapper}
               >
                 <div
                   ref={props.ref}
+                  className={styles.track}
                   style={{
-                    height: 6,
-                    width: "100%",
-                    borderRadius: 4,
                     background: getTrackBackground({
                       values: rangeValues,
-                      colors: ["#ccc", "#00a896", "#ccc"],
+                      colors: ['#ccc', '#00a896', '#ccc'],
                       min: MIN,
                       max: MAX,
                     }),
-                    alignSelf: "center",
                   }}
                 >
                   {children}
@@ -154,36 +137,15 @@ const PostFilters = ({
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                  height: 16,
-                  width: 16,
-                  borderRadius: "50%",
-                  backgroundColor: "#00a896",
-                  cursor: "pointer",
-                  boxShadow: "0 0 0 2px white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              />
+              <div {...props} className={styles.thumb} />
             )}
           />
-          <div
-            style={{
-              color: "#fff",
-              marginTop: 10,
-              textAlign: "center",
-              fontWeight: "600",
-            }}
-          >
+          <div className={styles.rangeValue}>
             {rangeValues[0]} - {rangeValues[1]}
           </div>
         </div>
       </div>
-    </aside>
+    </aside >
   );
 };
 
