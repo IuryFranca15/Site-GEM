@@ -103,7 +103,6 @@ export default function Publications() {
             allTypes={allTypes}
             onFilterChange={(novoFiltro) => setFiltros(novoFiltro)}
           />
-
         </div>
 
         {/* Lado direito: carrosséis ou grid */}
