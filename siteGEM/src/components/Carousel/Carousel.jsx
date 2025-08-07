@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
