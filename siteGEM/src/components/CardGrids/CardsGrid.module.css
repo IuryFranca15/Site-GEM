@@ -3,21 +3,19 @@
   color: #fafafa;
 }
 
-.container{
+.container {
   width: 100%;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 16px;
+  gap: 20px;
 }
 .card {
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-
 }
 .imageContainer {
   position: relative;
@@ -27,12 +25,12 @@
   width: 100%;
   display: block;
   border-radius: 8px;
-  opacity: 0.6; 
+  opacity: 0.6;
   transition: opacity 0.3s ease-in-out;
 }
 
 .card:hover .cardImage {
-  opacity: 0.9; 
+  opacity: 0.9;
 }
 
 .overlay {
@@ -59,4 +57,10 @@
   margin: 8px 0 0;
   font-size: 1rem;
   font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

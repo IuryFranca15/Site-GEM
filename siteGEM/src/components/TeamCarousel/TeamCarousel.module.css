@@ -1,10 +1,7 @@
 .container {
   width: 100%;
   background: linear-gradient(135deg, #0a2647 20%, #0e2f53, #05465f 40%);
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 5rem 1rem;
   box-sizing: border-box;
 }
 
@@ -81,14 +78,14 @@
 }
 @media (max-width: 1023px) {
   .navButton {
-    display: block; 
+    display: block;
     top: auto;
     bottom: -3.5rem;
     transform: none;
   }
 
   .navLeft {
-    left: 20%;
+    left: 10%;
   }
 
   .navRight {

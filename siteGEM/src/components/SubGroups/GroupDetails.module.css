@@ -1,15 +1,15 @@
 .container {
-  width: 100%; 
+  width: 100%;
   background-color: var(--bg-color);
 }
 
-.content{
+.content {
   max-width: 80rem;
   width: 100%;
   margin: 0 auto;
 }
 
-.groupDescription{
+.groupDescription {
   position: relative;
   width: 100%;
   min-height: 400px;
@@ -39,14 +39,14 @@
   display: flex;
   align-items: center;
   gap: 4rem;
-  padding-top: 70px;
+  padding-top: 4.375rem;
 }
 
-.groupDescription img{
+.groupDescription img {
   width: 160px;
 }
 
-.descriptionContent{
+.descriptionContent {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -56,23 +56,23 @@
   word-break: break-word;
 }
 
-.nameGroup{
+.nameGroup {
   font-size: 2rem;
   color: #f5f5ef;
 }
 
-.descricaoGroup{
+.descricaoGroup {
   color: #f5f5ef;
   font-size: 1.2rem;
   line-height: 1.7rem;
 }
 
-.members{
-  padding: 10rem 1rem ;
+.members {
+  padding: 10rem 1rem;
 }
 
-.memberTitle{
-  font-size:2rem;
+.memberTitle {
+  font-size: 2rem;
   color: #f5f5ef;
   font-weight: 500;
   padding-bottom: 3rem;
@@ -81,9 +81,9 @@
 @media (max-width: 768px) {
   .groupDescription {
     padding: 3rem 1rem;
-    min-height: auto; 
+    min-height: auto;
     flex-direction: column;
-    text-align: center; 
+    text-align: center;
   }
 
   .groupContent {
@@ -125,6 +125,15 @@
   }
 
   .descricaoGroup {
-    font-size:1rem;
+    font-size: 1rem;
+  }
+
+  .members {
+    padding: 3.75rem 0;
+  }
+
+  .memberTitle {
+    font-size: 1.5rem;
+    text-align: center;
   }
 }

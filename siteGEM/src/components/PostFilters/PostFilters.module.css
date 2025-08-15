@@ -141,12 +141,12 @@
 }
 
 @media (max-width: 768px) {
-  .track {
+  /* .track {
     width: 300px;
-  }
-  .containerSearch {
+  } */
+  /* .containerSearch {
     max-width: 100%;
-  }
+  } */
 
   .divider {
     margin-bottom: 0;

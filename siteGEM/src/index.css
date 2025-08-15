@@ -1,18 +1,20 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif
+  font-family: "Montserrat", sans-serif;
 }
 
-:root{
-   --text-color:#014460;
-   --text-color-secondary:#40b2ab;
-   --bg-color: #014460;
-   --bg-secondary: #40b2ab;
+:root {
+  --text-color: #014460;
+  --text-color-secondary: #40b2ab;
+  --bg-color: #014460;
+  --bg-secondary: #40b2ab;
 }
 
 .mySwiper {
+  overflow: visible;
+  position: relative;
   overflow: visible;
 }
 
@@ -22,3 +24,11 @@
   transition: all 0.3s ease;
 }
 
+/* .swiper-pagination {
+  position: absolute;
+  bottom: -60px;
+  width: 100%;
+  text-align: center;
+  z-index: 120;
+  pointer-events: auto;
+} */

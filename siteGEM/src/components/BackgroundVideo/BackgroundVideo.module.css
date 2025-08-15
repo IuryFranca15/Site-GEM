@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 .container {
   position: relative;
@@ -12,22 +12,22 @@
   position: relative;
   min-width: 100%;
   min-height: 100%;
-  padding-bottom: 56.25%; 
+  padding-bottom: 56.25%;
 }
 .iframe {
-    position: absolute;
-    z-index: 0;
-    width: 3123px;
-    height: 1757px;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-    opacity: 1;
-    user-select: none;
-    margin-top: 0px;
-    margin-left: -601.5px;
-    transition-property: opacity;
-    transition-duration: 1000ms;
+  position: absolute;
+  z-index: 0;
+  width: 3123px;
+  height: 1757px;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  opacity: 1;
+  user-select: none;
+  margin-top: 0px;
+  margin-left: -601.5px;
+  transition-property: opacity;
+  transition-duration: 1000ms;
 }
 
 .overlay {
@@ -41,10 +41,15 @@
   flex-direction: column;
   justify-content: center;
   z-index: 10;
-  background: linear-gradient(to right, rgba(2, 41, 57, 0.9), rgba(2, 41, 57, 0.5), rgba(2, 41, 57, 0.1));
-} 
+  background: linear-gradient(
+    to right,
+    rgba(2, 41, 57, 0.9),
+    rgba(2, 41, 57, 0.5),
+    rgba(2, 41, 57, 0.1)
+  );
+}
 
-.overlay span{
+.overlay span {
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
@@ -54,7 +59,7 @@
 .heading {
   font-size: 5rem;
   font-weight: 700;
-  max-width: 72rem; 
+  max-width: 72rem;
   font-family: "Montserrat", sans-serif;
   word-spacing: -13px;
   color: var(--text-color-secondary);
@@ -69,65 +74,62 @@
   font-family: "Montserrat", sans-serif;
 }
 
-
-.buttons{
+.buttons {
   display: flex;
   gap: 30px;
   padding-top: 30px;
   flex-wrap: wrap;
 }
 
-.button{
+.button {
   font-family: "Montserrat", sans-serif;
   background-color: rgba(230, 230, 228, 0.4);
   text-decoration: none;
   padding: 10px 14px;
   border-radius: 10px;
-  color:#fff;
+  color: #fff;
   font-size: 1.5rem;
   transition: 0.4s;
   font-weight: 500;
 }
 
-.button:hover{
+.button:hover {
   background-color: #fff;
   color: var(--text-color);
 
+  @media (max-width: 425px) {
+    .overlay {
+      padding: 0 20px;
+      background: rgba(2, 41, 57, 0.6);
+    }
+    .overlay p {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    .heading {
+      font-size: 4rem;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .buttons {
+      justify-content: center;
+    }
+    .button {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .overlay {
+      padding-left: 40px;
+    }
+    .heading {
+      font-size: 3rem;
+    }
+  }
 }
-@media (max-width: 1024px){
-  .heading{
+@media (max-width: 1024px) {
+  .heading {
     font-size: 5rem;
-  }
-}
-
-@media (max-width: 768px){
-  .overlay{
-    padding-left: 40px;
-  }
-  .heading{
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 425px){
-  .overlay{
-    padding: 0 20px;
-       background:rgba(2, 41, 57, 0.6);
-  }
-  .overlay p{
-  font-size: 1.2rem;
-  text-align: center;
-  }
-  .heading{
-    font-size: 4rem;
-    text-align: center;
-    padding: 20px 0;
-  }
-  .buttons{
-  justify-content: center;
-    
-  }
-  .button{
-    font-size: 1rem;
   }
 }
