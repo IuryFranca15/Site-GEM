@@ -21,7 +21,7 @@ const allGroups = [
   "Blue Finance",
   "Clima e meio ambiente",
   "Conceitos e métodos",
-  "Construção e reparação naval",
+  "Construção e reparação naval teste",
   "Defesa e segurança",
   "Energias offshore",
   "Minerais offshore",

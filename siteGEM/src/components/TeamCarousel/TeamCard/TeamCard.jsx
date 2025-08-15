@@ -7,27 +7,6 @@ const TeamCard = ({ name, role, image, bg, icon }) => {
 
     <div className={styles.cards}>
       <Link className={styles.link}>
-        {/* <article className={styles.card}>
-          <div className={styles.cardImageContainer}>
-            <img
-              src={image}
-              alt={name}
-              loading="lazy"
-              className={styles.cardImage}
-            />
-          </div>
-
-          <div className={styles.cardContent}>
-            <div>
-              <h2 className={styles.name}>{name}</h2>
-              <h3 className={styles.role}>{role}</h3>
-            </div>
-            <div>
-              <p className={styles.bio}>{bio}</p>
-            </div>
-          </div>
-        </article> */}
-
         <div className={`${styles.card} card`}>
           <div className={styles.imageWrapper}>
             <img
