@@ -4,7 +4,8 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import TeamCard from './TeamCard/TeamCard';
 import styles from './TeamCarousel.module.css';
 import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import { motion } from "framer-motion";
 
 
@@ -115,12 +116,12 @@ const TeamCarousel = () => {
           }}
           slidesPerGroup={2}
           spaceBetween={20}
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation, Autoplay, Pagination]}
           autoplay={{
             delay: 2000,
             disableOnInteraction: false
           }}
-          className={styles.mySwiper}
+
           breakpoints={{
             0: { slidesPerView: 1 },
             480: { slidesPerView: 1.3 },
@@ -138,7 +139,7 @@ const TeamCarousel = () => {
         </Swiper>
 
       </div>
-    </div>
+    </div >
   );
 };
 
