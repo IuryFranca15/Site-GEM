@@ -14,7 +14,7 @@ const teamMembers = [
   {
     name: 'Nathália Macedo',
     role: 'Clima e Meio Ambiente',
-    image: 'src/assets/image/Natalia_Macedo.png',
+    image: 'src/assets/image/Nathalia_Macedo.png',
     bg: 'src/assets/image/ex-bg-grupo.webp',
     icon: 'src/assets/image/pesca-icone.png'
   },
@@ -30,7 +30,7 @@ const teamMembers = [
   {
     name: 'Gabriel Magalhães',
     role: 'Energias Offshore',
-    image: 'src/assets/image/Natalia_Macedo.png',
+    image: 'src/assets/image/Nathalia_Macedo.png',
     bg: 'src/assets/image/ex-bg-grupo.webp',
     icon: 'src/assets/image/pesca-icone.png'
   },
@@ -46,7 +46,7 @@ const teamMembers = [
     name: 'Fernanda Lins',
     role: 'Conceitos e Métodos',
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    image: 'src/assets/image/Natalia_Macedo.png',
+    image: 'src/assets/image/Nathalia_Macedo.png',
     icon: 'src/assets/image/pesca-icone.png'
   },
   {
