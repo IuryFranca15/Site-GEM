@@ -7,54 +7,54 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { motion } from "framer-motion";
-
+import images from '../../utils/importImages';
 
 
 const teamMembers = [
   {
     name: 'Nathália Macedo',
     role: 'Clima e Meio Ambiente',
-    image: 'src/assets/image/Nathalia_Macedo.png',
+    image: images['Nathalia_Macedo.png'],
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    icon: 'src/assets/image/pesca-icone.png'
+    icon: images['clima_colorido.png']
   },
 
   {
     name: 'Giselle Gomes',
     role: 'Transportes e Infraestrutura',
-    image: 'src/assets/image/Giselle_Gomes.png',
+    image: images['Giselle_Gomes.png'],
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    icon: 'src/assets/image/pesca-icone.png'
+    icon: images['transporte_colorido.png']
   },
 
   {
     name: 'Gabriel Magalhães',
     role: 'Energias Offshore',
-    image: 'src/assets/image/Nathalia_Macedo.png',
+    image: images['Nathalia_Macedo.png'],
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    icon: 'src/assets/image/pesca-icone.png'
+    icon: images['energias_colorido.png']
   },
 
   {
     name: 'Maria Ribeiro',
     role: 'Turismo, esporte e lazer',
-    image: 'src/assets/image/Giselle_Gomes.png',
+    image: images['Giselle_Gomes.png'],
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    icon: 'src/assets/image/pesca-icone.png'
+    icon: images['turismo_colorido.png']
   },
   {
     name: 'Fernanda Lins',
     role: 'Conceitos e Métodos',
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    image: 'src/assets/image/Nathalia_Macedo.png',
-    icon: 'src/assets/image/pesca-icone.png'
+    image: images['Fernanda_Lins.png'],
+    icon: images['conceitos_colorido.png']
   },
   {
     name: 'Thiago Thierry',
     role: 'Defesa e Segurança',
     bg: 'src/assets/image/ex-bg-grupo.webp',
-    image: 'src/assets/image/Giselle_Gomes.png',
-    icon: 'src/assets/image/pesca-icone.png'
+    image: images['Thiago_Thierry.png'],
+    icon: images['defesa_colorido.png']
   },
 ]
 
