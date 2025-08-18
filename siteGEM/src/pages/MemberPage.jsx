@@ -1,4 +1,4 @@
-import Memberinfo from "../components/MemberInfo/Memberinfo";
+import Memberinfo from "../components/Memberinfo/Memberinfo";
 import LatestArticles from '../components/LatestArticles/LatestArticles'
 
 const MemberPage = () => {
