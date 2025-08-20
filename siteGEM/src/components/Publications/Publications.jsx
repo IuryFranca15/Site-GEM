@@ -105,9 +105,10 @@ export default function Publications() {
 
         {/* Lado direito: carrosséis ou grid */}
         <div style={{ flex: 1 }}>
+          <h2 className={style.title}>Publicações</h2>
           {!filtrosAtivos ? (
             <>
-              <CardsGrid title = "Publicações" data={dadosGerais} />
+              <CardsGrid title="Publicações" data={dadosGerais} />
             </>
           ) : (
             <CardsGrid data={dadosFiltrados} />
