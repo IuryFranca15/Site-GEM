@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import PostFilters from "../PostFilters/PostFilters";
-import Carousel from "../Carousel/Carousel";
 import CardsGrid from "../CardGrids/CardGrids";
 
 import post1 from "../../assets/image/post1.avif";
@@ -83,7 +82,7 @@ export default function Publications() {
 
   // Randomiza os dados para os carrosséis
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
-  const dadosSubgrupos = shuffleArray(dados).slice(0, 5);
+  const dadosGerais = shuffleArray(dados).slice(0, 5);
 
   const filtrosAtivos = !!(
     filtros.groups.length ||
@@ -108,8 +107,7 @@ export default function Publications() {
         <div style={{ flex: 1 }}>
           {!filtrosAtivos ? (
             <>
-              <CardsGrid data={dadosSubgrupos} />
-              {/* <Carousel title="Publicações por Subgrupos" data={dadosSubgrupos} /> */}
+              <CardsGrid data={dadosGerais} />
             </>
           ) : (
             <CardsGrid data={dadosFiltrados} />
