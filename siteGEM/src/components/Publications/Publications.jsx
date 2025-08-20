@@ -107,7 +107,7 @@ export default function Publications() {
         <div style={{ flex: 1 }}>
           {!filtrosAtivos ? (
             <>
-              <CardsGrid data={dadosGerais} />
+              <CardsGrid title = "Publicações" data={dadosGerais} />
             </>
           ) : (
             <CardsGrid data={dadosFiltrados} />
