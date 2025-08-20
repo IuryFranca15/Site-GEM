@@ -61,7 +61,7 @@ const Team = ({ modo = "grupos" }) => {
       .slice(0, 12); // limite de membros (pode mudar)
 
     return (
-      <div className={styles.container}>
+      <div className={styles.containerGeral}>
         <div className={styles.groupSection}>
           <motion.h2
             className={styles.title}
@@ -151,7 +151,7 @@ const Team = ({ modo = "grupos" }) => {
   // MODO GRUPOS (original)
   // =======================
   return (
-    <div className={styles.container}>
+    <div className={styles.containerGrupos}>
       <motion.h2
         className={styles.title}
         initial={{ opacity: 0, y: 40 }}
