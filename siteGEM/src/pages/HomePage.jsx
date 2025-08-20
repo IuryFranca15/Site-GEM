@@ -1,5 +1,5 @@
 import BackgroundVideo from '../components/BackgroundVideo/BackgroundVideo.jsx'
-import Team from '../components/TeamCarousel/TeamCarousel.jsx'
+import Team from '../components/Team/Team.jsx'
 import LatestArticles from '../components/LatestArticles/LatestArticles.jsx'
 import Newsletter from '../components/Newsletter/Newsletter.jsx'
 import RecommendedBooks from '../components/RecommendedBooks/RecommendedBooks.jsx'
@@ -10,15 +10,15 @@ const Home = () => {
   return (
     <>
       <BackgroundVideo />
-      <Team />
+      <Team modo="geral" />
       <PolicyBriefs
         images={[
-          { src: book , link: '#' },
-          { src: book , link: '#' },
-          { src: book , link: '#' },
-          { src: book , link: '#' },
-          { src: book , link: '#' },
-        ]}/>      
+          { src: book, link: '#' },
+          { src: book, link: '#' },
+          { src: book, link: '#' },
+          { src: book, link: '#' },
+          { src: book, link: '#' },
+        ]} />
       <LatestArticles />
       <RecommendedBooks />
       <Newsletter />
