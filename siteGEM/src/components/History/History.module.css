@@ -58,6 +58,66 @@
   padding-top: 30px;
 }
 
+.cardsContainer {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.infoCard {
+  position: relative;
+  background-color: #023048;
+  border-radius: 35px;
+  padding: 70px 30px 40px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.iconVisao {
+  position: absolute;
+  top: -30px;
+  left: 35%;
+  width: 100px;
+  height: auto;
+  transform: translateX(-5%) rotate(8deg);
+}
+
+.iconValores {
+  transform: translateX(5%) rotate(-15deg);
+}
+
+.infoCard:hover {
+  transform: translateY(-10px);
+}
+
+.infoCard h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color-secondary);
+}
+
+.infoCard p {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+}
+
+.icon {
+  position: absolute;
+  top: -50px;
+  left: 35%;
+  width: 100px;
+  height: auto;
+}
+
 
 @media (max-width: 1024px) {
   .overlay {
@@ -83,6 +143,19 @@
     flex: 0 0 auto;
     width: 250px;
     align-self: center;
+  }
+
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+  }
+
+  .icon {
+    left: 40%;
+  }
+
+  .iconVisao{
+    left: 40%;
   }
 }
 
@@ -114,6 +187,15 @@
     flex: 1 1 100%;
     align-items: center;
   }
+
+  .icon {
+    left: 35%;
+  }
+
+  .iconVisao {
+    left: 37%;
+  }
+
 }
 
 /* Celulares */
@@ -143,6 +225,13 @@
     align-items: center;
     text-align: center;
   }
+
+  .cardsContainer {
+    padding-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+
 }
 
 @media (max-width: 1600px) {
