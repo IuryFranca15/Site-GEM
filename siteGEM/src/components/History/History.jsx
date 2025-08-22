@@ -1,6 +1,7 @@
 import React from 'react'
 import Styles from './History.module.css'
 import logo from '../../assets/logoGemHistory.png'
+import images from '../../utils/importImages';
 
 const History = () => {
   return (
@@ -31,6 +32,46 @@ const History = () => {
 
         <img src={logo} alt="Logo GEM" className={Styles.logoImg} />
       </div>
+      </div>
+       <div className={Styles.cardsContainer}>
+        <div className={Styles.infoCard}>
+          <img src={images['objetivoicone.png']} className={Styles.icon}/>
+          <h3>Objetivo</h3>
+          <p>
+            Contribuir com a formulação de políticas públicas locais e
+            nacionais relacionadas à economia do mar e ao desenvolvimento
+            sustentável.
+          </p>
+        </div>
+
+        <div className={Styles.infoCard}>
+          <img src={images['missaoicone.png']} className={Styles.icon}/>
+          <h3>Missão</h3>
+          <p>
+            Prover dados confiáveis e análises qualificadas acerca dos setores
+            e das atividades da economia do mar do Brasil, por meio de cooperação
+            com instituições nacionais e internacionais.
+          </p>
+        </div>
+
+        <div className={Styles.infoCard}>
+          <img src={images['visaoicone.png']} className={Styles.iconVisao} />
+          <h3>Visão</h3>
+          <p>
+            Se consolidar como um grupo de pesquisa de referência nos estudos
+            brasileiros sobre economia do mar, contribuindo com a promoção da
+            cultura oceânica e com a transformação da realidade nacional.
+          </p>
+        </div>
+
+        <div className={Styles.infoCard}>
+          <img src={images['valoresicone.png']} className={`${Styles.icon} ${Styles.iconValores}`} />
+          <h3>Valores</h3>
+          <p>
+            Sustentabilidade, ética, diversidade, excelência, independência e
+            transparência.
+          </p>
+        </div>
       </div>
     </div>
   )
